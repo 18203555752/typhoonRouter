@@ -1,9 +1,9 @@
+import type { MapboxGeoJSONFeature } from 'mapbox-gl'
 import type mapboxgl from 'mapbox-gl'
-import mapbox from 'mapbox-gl'
+// import mapbox from 'mapbox-gl'
 import mapUtil from './mapBox'
 import { nanoid } from 'nanoid'
-import * as turf from '@turf/turf'
-import { MapboxGeoJSONFeature } from 'mapbox-gl'
+import turfCircle from '@turf/circle'
 import type { WindCircle } from './windCircle'
 // import { Feature } from 'geojson';
 export interface HasFeater extends mapboxgl.MapMouseEvent {
@@ -17,8 +17,10 @@ class BaseLayer {
   protected sourceId!: string
   protected layers: mapboxgl.Layer[] = []
   protected geoJson: any
+  protected mapbox!: typeof mapboxgl
   // protected keysTxt:string[] = []
-  constructor(map: mapboxgl.Map, arr: Array<any>) {
+  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr: Array<any>) {
+    this.mapbox = mapbox
     this.map = map
     this.geoJson = this.getJeoJson(arr)
     this.addSource(this.geoJson)
@@ -111,7 +113,7 @@ class BaseLayer {
  * 台风路径实线
  */
 class LineLayer extends BaseLayer {
-  constructor(map: mapboxgl.Map, arr?: any[]) {
+  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr?: any[]) {
     arr = arr || [
       {
         type: 'Feature',
@@ -121,7 +123,7 @@ class LineLayer extends BaseLayer {
         },
       },
     ]
-    super(map, arr)
+    super(mapbox, map, arr)
   }
   /**
    *
@@ -166,9 +168,9 @@ class LineLayer extends BaseLayer {
 // 路径上的点
 class windRouteCircleLayer extends BaseLayer {
   protected popup: mapboxgl.Popup | null = null
-  constructor(map: mapboxgl.Map, arr: any[]) {
+  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr: any[]) {
     // this.popup
-    super(map, arr)
+    super(mapbox, map, arr)
   }
   /**
    * 清楚图层
@@ -240,7 +242,7 @@ class windRouteCircleLayer extends BaseLayer {
       <div class='windRouterPop_row'> <div class='row-time'>十二级半径： </div> <div class='row-content'>${message.radius12}</div> </div>
     </div>
     `
-    this.popup = new mapbox.Popup({ closeOnClick: false })
+    this.popup = new this.mapbox.Popup({ closeOnClick: false })
       .setLngLat([message.lng, message.lat])
       .setHTML(html)
       .addTo(this.map)
@@ -279,7 +281,7 @@ class WindCircleLayer {
     const coordinates: number[] = []
     let feature: any
     this.arr.forEach((r, i) => {
-      feature = turf.circle(this.center, r, { steps: this.step })
+      feature = turfCircle(this.center, r, { steps: this.step })
       coordinates.push(
         ...feature.geometry.coordinates[0].slice(i * step, (i + 1) * step + 1)
       )
@@ -341,9 +343,11 @@ class forecastRouterLayer {
   protected circleJson: any
   protected lineJson: any
   protected popup!: mapboxgl.Popup
+  protected mapbox!: typeof mapboxgl
   // protected keysTxt:string[] = []
-  constructor(map: mapboxgl.Map, data: Array<any>) {
+  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: Array<any>) {
     this.map = map
+    this.mapbox = mapbox
     this.circleJson = this.getJeoJson(data)
     this.lineJson = this.getLineJson(data)
     this.addLineLayer()
@@ -527,7 +531,8 @@ class forecastRouterLayer {
       <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${message.move_dir}</div> </div>
     </div>
     `
-    this.popup = new mapbox.Popup({ closeOnClick: false })
+
+    this.popup = new this.mapbox.Popup({ closeOnClick: false })
       .setLngLat([message.lng, message.lat])
       .setHTML(html)
       .addTo(this.map)

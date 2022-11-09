@@ -1,4 +1,4 @@
-import mapbox from 'mapbox-gl';
+import type mapbox from 'mapbox-gl';
 export declare const PUBLIC_URL: string | undefined;
 interface TxtLayerOP {
     [key: string]: any;
@@ -22,14 +22,6 @@ declare class MapBox {
      * @returns MapBox
      */
     static getInstance(): MapBox;
-    /**
-     * 初始化地图
-     * @param id 地图容器id选择器
-     * @returns mapbox.Map
-     */
-    initMap(id: string, center?: mapbox.LngLatLike, zoom?: number): {
-        map: mapbox.Map;
-    };
     /**
      * 绘制线条
      * @param id
@@ -99,12 +91,6 @@ declare class MapBox {
      */
     drawFillPolygon(source?: string, opacity?: number): mapbox.FillLayer;
     /**
-     * 图片样式
-     * @param url
-     * @returns
-     */
-    getStyles(url: string): mapbox.Style;
-    /**
      * 获得天空背景
      */
     getSkyLayer(): mapbox.SkyLayer;
@@ -120,23 +106,7 @@ declare class MapBox {
      * @param url
      */
     addSorceLayer(map: mapbox.Map, sourceId: string, url: string, layerId?: string): mapbox.AnyLayer;
-    getImg(): void;
-    /**
-     *绘制标记点
-     * @param arr 经纬度
-     * @param op 标记点参数
-     * @returns
-     */
-    drawMaker(map: mapbox.Map, arr: number[], op?: mapbox.MarkerOptions): mapbox.Marker;
-    /**
-     * 绘制弹窗提示
-     * @param map
-     * @param arr
-     * @param op
-     * @returns
-     */
-    drawPopup(map?: mapbox.Map, arr?: number[], op?: mapbox.PopupOptions): mapbox.Popup;
 }
-export declare const CustomMap: typeof mapbox;
+export declare const CustomMap: typeof MapBox;
 declare const _default: MapBox;
 export default _default;

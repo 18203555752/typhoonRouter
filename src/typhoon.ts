@@ -1,5 +1,4 @@
 import type mapboxgl from 'mapbox-gl'
-import mapbox from 'mapbox-gl'
 import {
   BaseLayer,
   LineLayer,
@@ -17,13 +16,14 @@ class Typhoon {
   protected map: mapboxgl.Map
   protected live_circle: any
   protected live_line: any
-  live_marker: mapbox.Marker | null
+  live_marker: mapboxgl.Marker | null
   data: any
   protected forecastData: any[] = []
   protected forecastLayer: any[] = []
-
-  constructor(map: mapboxgl.Map, data: any) {
+  protected mapbox: typeof mapboxgl
+  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any) {
     this.map = map
+    this.mapbox = mapbox
     this.live_marker = null
     this.data = data
     console.log(data)
@@ -32,21 +32,18 @@ class Typhoon {
 
   drawLive() {
     // 台风路径上的线 line
-    this.live_line = new LineLayer(this.map)
+    this.live_line = new LineLayer(this.mapbox, this.map)
     this.live_line.addLineLayer()
 
     // 台风路径上的点 pointer
-    this.live_circle = new windRouteCircleLayer(this.map, [])
+    this.live_circle = new windRouteCircleLayer(this.mapbox, this.map, [])
     this.live_circle.addCircleLayer('#333', [0, 0], 4)
     this.addForecast()
     // 台风图标
     const div = document.createElement('div')
     div.innerHTML = `<div class="img-pos"></div>`
     let data = this.data[0].points
-    // 风圈
-    console.log(data)
-
-    this.live_marker = new mapbox.Marker({ element: div })
+    this.live_marker = new this.mapbox.Marker({ element: div })
 
     // 渲染路径的每一步
     const callBack = (cur: number) => {
@@ -70,6 +67,7 @@ class Typhoon {
         }
       }
       console.log(this.live_circle)
+      // 风圈
       this.drawWindCircle(data[data.length - 1])
     }
     // 调用动画
@@ -88,7 +86,9 @@ class Typhoon {
     })
     this.forecastLayer = []
     this.forecastData.forEach((data) => {
-      this.forecastLayer.push(new forecastRouterLayer(this.map, data))
+      this.forecastLayer.push(
+        new forecastRouterLayer(this.mapbox, this.map, data)
+      )
     })
   }
   getFeature(n: number, data: any[]) {

@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'nosources-source-map',
   output: {
     filename: 'typhoon.js',
-    // filename: './index.ts',
+    libraryTarget: 'umd',	//umd表所有模块化规范的集合
     path: path.resolve(__dirname, 'dist')
   },
   target: 'web',
@@ -18,10 +18,15 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
-        use: ['babel-loader']
-      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: ['babel-loader']
+      // },
+      // {
+      //   test: /\.jsx?$/,
+      //   use: ['babel-loader']
+      // },
       {
         test: /\.ts$/,
         use: ['ts-loader']
@@ -29,9 +34,7 @@ module.exports = {
     ]
   },
   externals: {
-    'mapbox-gl': 'mapbox',
-    'nanoid': 'nanoid',
-    '@turf/turf': 'turf'
+    'mapbox-gl': 'mapbox'
   },
   resolve: {
     extensions: ['.ts', ".js", ".json", '.jsx']

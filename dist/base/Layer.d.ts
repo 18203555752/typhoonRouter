@@ -1,5 +1,5 @@
+import type { MapboxGeoJSONFeature } from 'mapbox-gl';
 import type mapboxgl from 'mapbox-gl';
-import { MapboxGeoJSONFeature } from 'mapbox-gl';
 import type { WindCircle } from './windCircle';
 export interface HasFeater extends mapboxgl.MapMouseEvent {
     features?: MapboxGeoJSONFeature[];
@@ -12,7 +12,8 @@ declare class BaseLayer {
     protected sourceId: string;
     protected layers: mapboxgl.Layer[];
     protected geoJson: any;
-    constructor(map: mapboxgl.Map, arr: Array<any>);
+    protected mapbox: typeof mapboxgl;
+    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr: Array<any>);
     /**
      *获得ids
      */
@@ -53,7 +54,7 @@ declare class BaseLayer {
  * 台风路径实线
  */
 declare class LineLayer extends BaseLayer {
-    constructor(map: mapboxgl.Map, arr?: any[]);
+    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr?: any[]);
     /**
      *
      * @param color
@@ -66,7 +67,7 @@ declare class LineLayer extends BaseLayer {
 }
 declare class windRouteCircleLayer extends BaseLayer {
     protected popup: mapboxgl.Popup | null;
-    constructor(map: mapboxgl.Map, arr: any[]);
+    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr: any[]);
     /**
      * 清楚图层
      */
@@ -130,7 +131,8 @@ declare class forecastRouterLayer {
     protected circleJson: any;
     protected lineJson: any;
     protected popup: mapboxgl.Popup;
-    constructor(map: mapboxgl.Map, data: Array<any>);
+    protected mapbox: typeof mapboxgl;
+    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: Array<any>);
     /**
      *获得ids
      */

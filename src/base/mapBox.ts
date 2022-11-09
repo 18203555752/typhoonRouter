@@ -1,7 +1,5 @@
-import mapbox from 'mapbox-gl'
+import type mapbox from 'mapbox-gl'
 
-const spriteUrl =
-  process.env.NODE_ENV == 'production' ? '' : `http://${window.location.host}`
 export const PUBLIC_URL = process.env.BASE_URL
 interface TxtLayerOP {
   [key: string]: any
@@ -28,46 +26,6 @@ class MapBox {
    */
   static getInstance() {
     return this.box
-  }
-
-  /**
-   * 初始化地图
-   * @param id 地图容器id选择器
-   * @returns mapbox.Map
-   */
-  initMap(id: string, center: mapbox.LngLatLike = [120.553, 29.191], zoom = 5) {
-    mapbox.accessToken =
-      'pk.eyJ1IjoibGl6aGFuMTIyNyIsImEiOiJja3QyamowNnMwcGprMnhtaDUwbTM3YXdtIn0.rDMU626lA9qzB8Do2cq_hA'
-    const style: any = {
-      version: 8,
-      glyphs: `${PUBLIC_URL}font/glyphs/{fontstack}/{range}.pbf`,
-      sprite: spriteUrl + `${PUBLIC_URL}font/sprite/sprite`,
-      sources: {},
-
-      layers: [],
-    }
-    var map = new mapbox.Map({
-      container: id,
-      style,
-      // style: ,
-      zoom: zoom,
-      fadeDuration: 0,
-
-      // crossSourceCollisions: true,
-      crossSourceCollisions: false,
-      preserveDrawingBuffer: true,
-      // @ts-ignore
-      center: center,
-      maxBounds: [
-        [116.5, 23.5],
-        [125.5, 33],
-      ],
-    })
-    // console.log(style.sources.tian.titles)
-    // let styles = [this.getStyles(urlTian), this.getStyles(urlDixing), this.getStyles(urlSatel)]
-
-    // map.setStyle(styles[0])
-    return { map }
   }
 
   /**
@@ -492,37 +450,6 @@ class MapBox {
   }
 
   /**
-   * 图片样式
-   * @param url
-   * @returns
-   */
-  getStyles(url: string) {
-    const style: mapbox.Style = {
-      version: 8,
-      glyphs: `${PUBLIC_URL}font/glyphs/{fontstack}/{range}.pbf`,
-      sprite: spriteUrl + `${PUBLIC_URL}font/sprite/sprite`,
-      sources: {
-        tian: this.getTile(url),
-
-        // tian: {
-        //
-        //   type: 'raster',
-        //   tiles: [
-        //     // "http://172.21.129.15/geoserver/gwc/service/wms?service=WMS&version=1.1.1&request=GetMap&layers=tianditu:ZJ_kx_tianditu_dxL01&styles=&bbox={bbox-epsg-3857}&width=256&height=256&srs=EPSG:3857&format=image/png&TRANSPARENT=TRUE",
-        //     url,
-        //
-        //     // urlDixing, urlSatel
-        //     // 'http://t3.tianditu.gov.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}&tk=5a1d34815475f88e6d8802da6be832ae',
-        //   ],
-        //   tileSize: 256,
-        // },
-      },
-      layers: [{ id: 'tian', type: 'raster', source: 'tian' }],
-    }
-    return style
-  }
-
-  /**
    * 获得天空背景
    */
   getSkyLayer() {
@@ -579,36 +506,7 @@ class MapBox {
     map.addLayer(wmtsLayer)
     return wmtsLayer
   }
-
-  getImg() {
-    // const layer:mapbox.ImageSourceOptions
-  }
-  /**
-   *绘制标记点
-   * @param arr 经纬度
-   * @param op 标记点参数
-   * @returns
-   */
-  drawMaker(map: mapbox.Map, arr: number[], op: mapbox.MarkerOptions = {}) {
-    return new mapbox.Marker(op).setLngLat(arr as mapbox.LngLatLike).addTo(map)
-  }
-  /**
-   * 绘制弹窗提示
-   * @param map
-   * @param arr
-   * @param op
-   * @returns
-   */
-  drawPopup(
-    map?: mapbox.Map,
-    arr?: number[],
-    op: mapbox.PopupOptions = { closeButton: false, closeOnClick: false }
-  ) {
-    if (map && arr)
-      return new mapbox.Popup(op).setLngLat(arr as mapbox.LngLatLike).addTo(map)
-    return new mapbox.Popup({ closeButton: false, closeOnClick: false })
-  }
 }
 
-export const CustomMap = mapbox
+export const CustomMap = MapBox
 export default MapBox.getInstance()

@@ -1,4 +1,14 @@
-/******/ (() => { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else {
+		var a = factory();
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(self, () => {
+return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
@@ -16,14 +26,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "forecastRouterLayer": () => (/* binding */ forecastRouterLayer),
 /* harmony export */   "windRouteCircleLayer": () => (/* binding */ windRouteCircleLayer)
 /* harmony export */ });
-/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mapbox-gl */ "mapbox-gl");
-/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mapbox_gl__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mapBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mapBox */ "./src/base/mapBox.ts");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! nanoid */ "nanoid");
-/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(nanoid__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _turf_turf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @turf/turf */ "@turf/turf");
-/* harmony import */ var _turf_turf__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_turf_turf__WEBPACK_IMPORTED_MODULE_3__);
-
+/* harmony import */ var _mapBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./mapBox */ "./src/base/mapBox.ts");
+/* harmony import */ var nanoid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! nanoid */ "./node_modules/nanoid/index.browser.js");
+/* harmony import */ var _turf_circle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @turf/circle */ "./node_modules/@turf/circle/dist/es/index.js");
+// import mapbox from 'mapbox-gl'
 
 
 
@@ -32,8 +38,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 class BaseLayer {
     // protected keysTxt:string[] = []
-    constructor(map, arr) {
+    constructor(mapbox, map, arr) {
         this.layers = [];
+        this.mapbox = mapbox;
         this.map = map;
         this.geoJson = this.getJeoJson(arr);
         this.addSource(this.geoJson);
@@ -101,7 +108,7 @@ class BaseLayer {
      */
     addCircleLayer(color = '#e43', offset = [0, 0.7], size = 16) {
         const id = 'circle_' + (0,nanoid__WEBPACK_IMPORTED_MODULE_2__.nanoid)();
-        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_1__["default"].getMakerCircleLayer({
+        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_0__["default"].getMakerCircleLayer({
             id,
             offset,
             size,
@@ -123,7 +130,7 @@ class BaseLayer {
  * 台风路径实线
  */
 class LineLayer extends BaseLayer {
-    constructor(map, arr) {
+    constructor(mapbox, map, arr) {
         arr = arr || [
             {
                 type: 'Feature',
@@ -133,7 +140,7 @@ class LineLayer extends BaseLayer {
                 },
             },
         ];
-        super(map, arr);
+        super(mapbox, map, arr);
     }
     /**
      *
@@ -153,7 +160,7 @@ class LineLayer extends BaseLayer {
             'line-width': 2,
             'line-opacity': 0.8,
         };
-        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_1__["default"].getLineLayer({
+        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_0__["default"].getLineLayer({
             id,
             layout,
             paint,
@@ -175,9 +182,9 @@ class LineLayer extends BaseLayer {
 }
 // 路径上的点
 class windRouteCircleLayer extends BaseLayer {
-    constructor(map, arr) {
+    constructor(mapbox, map, arr) {
         // this.popup
-        super(map, arr);
+        super(mapbox, map, arr);
         this.popup = null;
     }
     /**
@@ -197,7 +204,7 @@ class windRouteCircleLayer extends BaseLayer {
      */
     addCircleLayer(color = '#e43', offset = [0, 0.7], size = 16) {
         const id = 'circle_' + (0,nanoid__WEBPACK_IMPORTED_MODULE_2__.nanoid)();
-        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_1__["default"].getMakerCircleLayer({
+        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_0__["default"].getMakerCircleLayer({
             id,
             offset,
             size,
@@ -249,7 +256,7 @@ class windRouteCircleLayer extends BaseLayer {
       <div class='windRouterPop_row'> <div class='row-time'>十二级半径： </div> <div class='row-content'>${message.radius12}</div> </div>
     </div>
     `;
-        this.popup = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().Popup)({ closeOnClick: false })
+        this.popup = new this.mapbox.Popup({ closeOnClick: false })
             .setLngLat([message.lng, message.lat])
             .setHTML(html)
             .addTo(this.map);
@@ -275,7 +282,7 @@ class WindCircleLayer {
         const coordinates = [];
         let feature;
         this.arr.forEach((r, i) => {
-            feature = _turf_turf__WEBPACK_IMPORTED_MODULE_3__.circle(this.center, r, { steps: this.step });
+            feature = (0,_turf_circle__WEBPACK_IMPORTED_MODULE_1__["default"])(this.center, r, { steps: this.step });
             coordinates.push(...feature.geometry.coordinates[0].slice(i * step, (i + 1) * step + 1));
         });
         // features.forEach(item => {
@@ -299,7 +306,7 @@ class WindCircleLayer {
      * @returns
      */
     addCircleLayer() {
-        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_1__["default"].drawFillPolygon(this.sourceId, 0.4);
+        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_0__["default"].drawFillPolygon(this.sourceId, 0.4);
         this.map.addLayer(layer);
         this.layer = layer;
         return this;
@@ -326,10 +333,11 @@ class WindCircleLayer {
  */
 class forecastRouterLayer {
     // protected keysTxt:string[] = []
-    constructor(map, data) {
+    constructor(mapbox, map, data) {
         this.sourceIds = [];
         this.layers = [];
         this.map = map;
+        this.mapbox = mapbox;
         this.circleJson = this.getJeoJson(data);
         this.lineJson = this.getLineJson(data);
         this.addLineLayer();
@@ -439,7 +447,7 @@ class forecastRouterLayer {
     addCircleLayer(color = '#333', offset = [0, 0.7], size = 4) {
         const id = 'circle_' + (0,nanoid__WEBPACK_IMPORTED_MODULE_2__.nanoid)();
         this.addSource(id, this.circleJson);
-        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_1__["default"].getMakerCircleLayer({
+        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_0__["default"].getMakerCircleLayer({
             id,
             offset,
             size,
@@ -465,7 +473,7 @@ class forecastRouterLayer {
             'line-opacity': 0.8,
             'line-dasharray': [2, 4],
         };
-        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_1__["default"].getLineLayer({
+        const layer = _mapBox__WEBPACK_IMPORTED_MODULE_0__["default"].getLineLayer({
             id,
             layout,
             paint,
@@ -515,7 +523,7 @@ class forecastRouterLayer {
       <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${message.move_dir}</div> </div>
     </div>
     `;
-        this.popup = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().Popup)({ closeOnClick: false })
+        this.popup = new this.mapbox.Popup({ closeOnClick: false })
             .setLngLat([message.lng, message.lat])
             .setHTML(html)
             .addTo(this.map);
@@ -539,10 +547,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PUBLIC_URL": () => (/* binding */ PUBLIC_URL),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mapbox-gl */ "mapbox-gl");
-/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mapbox_gl__WEBPACK_IMPORTED_MODULE_0__);
-
-const spriteUrl =  false ? 0 : `http://${window.location.host}`;
 const PUBLIC_URL = process.env.BASE_URL;
 /**
  * mapbox 工具类
@@ -554,42 +558,6 @@ class MapBox {
      */
     static getInstance() {
         return this.box;
-    }
-    /**
-     * 初始化地图
-     * @param id 地图容器id选择器
-     * @returns mapbox.Map
-     */
-    initMap(id, center = [120.553, 29.191], zoom = 5) {
-        (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().accessToken) =
-            'pk.eyJ1IjoibGl6aGFuMTIyNyIsImEiOiJja3QyamowNnMwcGprMnhtaDUwbTM3YXdtIn0.rDMU626lA9qzB8Do2cq_hA';
-        const style = {
-            version: 8,
-            glyphs: `${PUBLIC_URL}font/glyphs/{fontstack}/{range}.pbf`,
-            sprite: spriteUrl + `${PUBLIC_URL}font/sprite/sprite`,
-            sources: {},
-            layers: [],
-        };
-        var map = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().Map)({
-            container: id,
-            style,
-            // style: ,
-            zoom: zoom,
-            fadeDuration: 0,
-            // crossSourceCollisions: true,
-            crossSourceCollisions: false,
-            preserveDrawingBuffer: true,
-            // @ts-ignore
-            center: center,
-            maxBounds: [
-                [116.5, 23.5],
-                [125.5, 33],
-            ],
-        });
-        // console.log(style.sources.tian.titles)
-        // let styles = [this.getStyles(urlTian), this.getStyles(urlDixing), this.getStyles(urlSatel)]
-        // map.setStyle(styles[0])
-        return { map };
     }
     /**
      * 绘制线条
@@ -931,35 +899,6 @@ class MapBox {
         return layer;
     }
     /**
-     * 图片样式
-     * @param url
-     * @returns
-     */
-    getStyles(url) {
-        const style = {
-            version: 8,
-            glyphs: `${PUBLIC_URL}font/glyphs/{fontstack}/{range}.pbf`,
-            sprite: spriteUrl + `${PUBLIC_URL}font/sprite/sprite`,
-            sources: {
-                tian: this.getTile(url),
-                // tian: {
-                //
-                //   type: 'raster',
-                //   tiles: [
-                //     // "http://172.21.129.15/geoserver/gwc/service/wms?service=WMS&version=1.1.1&request=GetMap&layers=tianditu:ZJ_kx_tianditu_dxL01&styles=&bbox={bbox-epsg-3857}&width=256&height=256&srs=EPSG:3857&format=image/png&TRANSPARENT=TRUE",
-                //     url,
-                //
-                //     // urlDixing, urlSatel
-                //     // 'http://t3.tianditu.gov.cn/DataServer?T=vec_w&X={x}&Y={y}&L={z}&tk=5a1d34815475f88e6d8802da6be832ae',
-                //   ],
-                //   tileSize: 256,
-                // },
-            },
-            layers: [{ id: 'tian', type: 'raster', source: 'tian' }],
-        };
-        return style;
-    }
-    /**
      * 获得天空背景
      */
     getSkyLayer() {
@@ -1009,33 +948,9 @@ class MapBox {
         map.addLayer(wmtsLayer);
         return wmtsLayer;
     }
-    getImg() {
-        // const layer:mapbox.ImageSourceOptions
-    }
-    /**
-     *绘制标记点
-     * @param arr 经纬度
-     * @param op 标记点参数
-     * @returns
-     */
-    drawMaker(map, arr, op = {}) {
-        return new (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().Marker)(op).setLngLat(arr).addTo(map);
-    }
-    /**
-     * 绘制弹窗提示
-     * @param map
-     * @param arr
-     * @param op
-     * @returns
-     */
-    drawPopup(map, arr, op = { closeButton: false, closeOnClick: false }) {
-        if (map && arr)
-            return new (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().Popup)(op).setLngLat(arr).addTo(map);
-        return new (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().Popup)({ closeButton: false, closeOnClick: false });
-    }
 }
 MapBox.box = new MapBox();
-const CustomMap = (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default());
+const CustomMap = MapBox;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MapBox.getInstance());
 
 
@@ -1122,33 +1037,1175 @@ function myAnimation(parmas) {
 
 /***/ }),
 
-/***/ "mapbox-gl":
-/*!*************************!*\
-  !*** external "mapbox" ***!
-  \*************************/
-/***/ ((module) => {
+/***/ "./node_modules/@turf/circle/dist/es/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@turf/circle/dist/es/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-module.exports = mapbox;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _turf_destination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @turf/destination */ "./node_modules/@turf/destination/dist/es/index.js");
+/* harmony import */ var _turf_helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @turf/helpers */ "./node_modules/@turf/helpers/dist/es/index.js");
+
+
+/**
+ * Takes a {@link Point} and calculates the circle polygon given a radius in degrees, radians, miles, or kilometers; and steps for precision.
+ *
+ * @name circle
+ * @param {Feature<Point>|number[]} center center point
+ * @param {number} radius radius of the circle
+ * @param {Object} [options={}] Optional parameters
+ * @param {number} [options.steps=64] number of steps
+ * @param {string} [options.units='kilometers'] miles, kilometers, degrees, or radians
+ * @param {Object} [options.properties={}] properties
+ * @returns {Feature<Polygon>} circle polygon
+ * @example
+ * var center = [-75.343, 39.984];
+ * var radius = 5;
+ * var options = {steps: 10, units: 'kilometers', properties: {foo: 'bar'}};
+ * var circle = turf.circle(center, radius, options);
+ *
+ * //addToMap
+ * var addToMap = [turf.point(center), circle]
+ */
+function circle(center, radius, options) {
+    if (options === void 0) { options = {}; }
+    // default params
+    var steps = options.steps || 64;
+    var properties = options.properties
+        ? options.properties
+        : !Array.isArray(center) && center.type === "Feature" && center.properties
+            ? center.properties
+            : {};
+    // main
+    var coordinates = [];
+    for (var i = 0; i < steps; i++) {
+        coordinates.push((0,_turf_destination__WEBPACK_IMPORTED_MODULE_0__["default"])(center, radius, (i * -360) / steps, options).geometry
+            .coordinates);
+    }
+    coordinates.push(coordinates[0]);
+    return (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_1__.polygon)([coordinates], properties);
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (circle);
+
 
 /***/ }),
 
-/***/ "nanoid":
-/*!*************************!*\
-  !*** external "nanoid" ***!
-  \*************************/
-/***/ ((module) => {
+/***/ "./node_modules/@turf/destination/dist/es/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@turf/destination/dist/es/index.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-module.exports = nanoid;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ destination)
+/* harmony export */ });
+/* harmony import */ var _turf_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @turf/helpers */ "./node_modules/@turf/helpers/dist/es/index.js");
+/* harmony import */ var _turf_invariant__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @turf/invariant */ "./node_modules/@turf/invariant/dist/es/index.js");
+// http://en.wikipedia.org/wiki/Haversine_formula
+// http://www.movable-type.co.uk/scripts/latlong.html
+
+
+/**
+ * Takes a {@link Point} and calculates the location of a destination point given a distance in
+ * degrees, radians, miles, or kilometers; and bearing in degrees.
+ * This uses the [Haversine formula](http://en.wikipedia.org/wiki/Haversine_formula) to account for global curvature.
+ *
+ * @name destination
+ * @param {Coord} origin starting point
+ * @param {number} distance distance from the origin point
+ * @param {number} bearing ranging from -180 to 180
+ * @param {Object} [options={}] Optional parameters
+ * @param {string} [options.units='kilometers'] miles, kilometers, degrees, or radians
+ * @param {Object} [options.properties={}] Translate properties to Point
+ * @returns {Feature<Point>} destination point
+ * @example
+ * var point = turf.point([-75.343, 39.984]);
+ * var distance = 50;
+ * var bearing = 90;
+ * var options = {units: 'miles'};
+ *
+ * var destination = turf.destination(point, distance, bearing, options);
+ *
+ * //addToMap
+ * var addToMap = [point, destination]
+ * destination.properties['marker-color'] = '#f00';
+ * point.properties['marker-color'] = '#0f0';
+ */
+function destination(origin, distance, bearing, options) {
+    if (options === void 0) { options = {}; }
+    // Handle input
+    var coordinates1 = (0,_turf_invariant__WEBPACK_IMPORTED_MODULE_1__.getCoord)(origin);
+    var longitude1 = (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_0__.degreesToRadians)(coordinates1[0]);
+    var latitude1 = (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_0__.degreesToRadians)(coordinates1[1]);
+    var bearingRad = (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_0__.degreesToRadians)(bearing);
+    var radians = (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_0__.lengthToRadians)(distance, options.units);
+    // Main
+    var latitude2 = Math.asin(Math.sin(latitude1) * Math.cos(radians) +
+        Math.cos(latitude1) * Math.sin(radians) * Math.cos(bearingRad));
+    var longitude2 = longitude1 +
+        Math.atan2(Math.sin(bearingRad) * Math.sin(radians) * Math.cos(latitude1), Math.cos(radians) - Math.sin(latitude1) * Math.sin(latitude2));
+    var lng = (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_0__.radiansToDegrees)(longitude2);
+    var lat = (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_0__.radiansToDegrees)(latitude2);
+    return (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_0__.point)([lng, lat], options.properties);
+}
+
 
 /***/ }),
 
-/***/ "@turf/turf":
-/*!***********************!*\
-  !*** external "turf" ***!
-  \***********************/
-/***/ ((module) => {
+/***/ "./node_modules/@turf/helpers/dist/es/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/@turf/helpers/dist/es/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-module.exports = turf;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "areaFactors": () => (/* binding */ areaFactors),
+/* harmony export */   "bearingToAzimuth": () => (/* binding */ bearingToAzimuth),
+/* harmony export */   "convertArea": () => (/* binding */ convertArea),
+/* harmony export */   "convertLength": () => (/* binding */ convertLength),
+/* harmony export */   "degreesToRadians": () => (/* binding */ degreesToRadians),
+/* harmony export */   "earthRadius": () => (/* binding */ earthRadius),
+/* harmony export */   "factors": () => (/* binding */ factors),
+/* harmony export */   "feature": () => (/* binding */ feature),
+/* harmony export */   "featureCollection": () => (/* binding */ featureCollection),
+/* harmony export */   "geometry": () => (/* binding */ geometry),
+/* harmony export */   "geometryCollection": () => (/* binding */ geometryCollection),
+/* harmony export */   "isNumber": () => (/* binding */ isNumber),
+/* harmony export */   "isObject": () => (/* binding */ isObject),
+/* harmony export */   "lengthToDegrees": () => (/* binding */ lengthToDegrees),
+/* harmony export */   "lengthToRadians": () => (/* binding */ lengthToRadians),
+/* harmony export */   "lineString": () => (/* binding */ lineString),
+/* harmony export */   "lineStrings": () => (/* binding */ lineStrings),
+/* harmony export */   "multiLineString": () => (/* binding */ multiLineString),
+/* harmony export */   "multiPoint": () => (/* binding */ multiPoint),
+/* harmony export */   "multiPolygon": () => (/* binding */ multiPolygon),
+/* harmony export */   "point": () => (/* binding */ point),
+/* harmony export */   "points": () => (/* binding */ points),
+/* harmony export */   "polygon": () => (/* binding */ polygon),
+/* harmony export */   "polygons": () => (/* binding */ polygons),
+/* harmony export */   "radiansToDegrees": () => (/* binding */ radiansToDegrees),
+/* harmony export */   "radiansToLength": () => (/* binding */ radiansToLength),
+/* harmony export */   "round": () => (/* binding */ round),
+/* harmony export */   "unitsFactors": () => (/* binding */ unitsFactors),
+/* harmony export */   "validateBBox": () => (/* binding */ validateBBox),
+/* harmony export */   "validateId": () => (/* binding */ validateId)
+/* harmony export */ });
+/**
+ * @module helpers
+ */
+/**
+ * Earth Radius used with the Harvesine formula and approximates using a spherical (non-ellipsoid) Earth.
+ *
+ * @memberof helpers
+ * @type {number}
+ */
+var earthRadius = 6371008.8;
+/**
+ * Unit of measurement factors using a spherical (non-ellipsoid) earth radius.
+ *
+ * @memberof helpers
+ * @type {Object}
+ */
+var factors = {
+    centimeters: earthRadius * 100,
+    centimetres: earthRadius * 100,
+    degrees: earthRadius / 111325,
+    feet: earthRadius * 3.28084,
+    inches: earthRadius * 39.37,
+    kilometers: earthRadius / 1000,
+    kilometres: earthRadius / 1000,
+    meters: earthRadius,
+    metres: earthRadius,
+    miles: earthRadius / 1609.344,
+    millimeters: earthRadius * 1000,
+    millimetres: earthRadius * 1000,
+    nauticalmiles: earthRadius / 1852,
+    radians: 1,
+    yards: earthRadius * 1.0936,
+};
+/**
+ * Units of measurement factors based on 1 meter.
+ *
+ * @memberof helpers
+ * @type {Object}
+ */
+var unitsFactors = {
+    centimeters: 100,
+    centimetres: 100,
+    degrees: 1 / 111325,
+    feet: 3.28084,
+    inches: 39.37,
+    kilometers: 1 / 1000,
+    kilometres: 1 / 1000,
+    meters: 1,
+    metres: 1,
+    miles: 1 / 1609.344,
+    millimeters: 1000,
+    millimetres: 1000,
+    nauticalmiles: 1 / 1852,
+    radians: 1 / earthRadius,
+    yards: 1.0936133,
+};
+/**
+ * Area of measurement factors based on 1 square meter.
+ *
+ * @memberof helpers
+ * @type {Object}
+ */
+var areaFactors = {
+    acres: 0.000247105,
+    centimeters: 10000,
+    centimetres: 10000,
+    feet: 10.763910417,
+    hectares: 0.0001,
+    inches: 1550.003100006,
+    kilometers: 0.000001,
+    kilometres: 0.000001,
+    meters: 1,
+    metres: 1,
+    miles: 3.86e-7,
+    millimeters: 1000000,
+    millimetres: 1000000,
+    yards: 1.195990046,
+};
+/**
+ * Wraps a GeoJSON {@link Geometry} in a GeoJSON {@link Feature}.
+ *
+ * @name feature
+ * @param {Geometry} geometry input geometry
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the Feature
+ * @returns {Feature} a GeoJSON Feature
+ * @example
+ * var geometry = {
+ *   "type": "Point",
+ *   "coordinates": [110, 50]
+ * };
+ *
+ * var feature = turf.feature(geometry);
+ *
+ * //=feature
+ */
+function feature(geom, properties, options) {
+    if (options === void 0) { options = {}; }
+    var feat = { type: "Feature" };
+    if (options.id === 0 || options.id) {
+        feat.id = options.id;
+    }
+    if (options.bbox) {
+        feat.bbox = options.bbox;
+    }
+    feat.properties = properties || {};
+    feat.geometry = geom;
+    return feat;
+}
+/**
+ * Creates a GeoJSON {@link Geometry} from a Geometry string type & coordinates.
+ * For GeometryCollection type use `helpers.geometryCollection`
+ *
+ * @name geometry
+ * @param {string} type Geometry Type
+ * @param {Array<any>} coordinates Coordinates
+ * @param {Object} [options={}] Optional Parameters
+ * @returns {Geometry} a GeoJSON Geometry
+ * @example
+ * var type = "Point";
+ * var coordinates = [110, 50];
+ * var geometry = turf.geometry(type, coordinates);
+ * // => geometry
+ */
+function geometry(type, coordinates, _options) {
+    if (_options === void 0) { _options = {}; }
+    switch (type) {
+        case "Point":
+            return point(coordinates).geometry;
+        case "LineString":
+            return lineString(coordinates).geometry;
+        case "Polygon":
+            return polygon(coordinates).geometry;
+        case "MultiPoint":
+            return multiPoint(coordinates).geometry;
+        case "MultiLineString":
+            return multiLineString(coordinates).geometry;
+        case "MultiPolygon":
+            return multiPolygon(coordinates).geometry;
+        default:
+            throw new Error(type + " is invalid");
+    }
+}
+/**
+ * Creates a {@link Point} {@link Feature} from a Position.
+ *
+ * @name point
+ * @param {Array<number>} coordinates longitude, latitude position (each in decimal degrees)
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the Feature
+ * @returns {Feature<Point>} a Point feature
+ * @example
+ * var point = turf.point([-75.343, 39.984]);
+ *
+ * //=point
+ */
+function point(coordinates, properties, options) {
+    if (options === void 0) { options = {}; }
+    if (!coordinates) {
+        throw new Error("coordinates is required");
+    }
+    if (!Array.isArray(coordinates)) {
+        throw new Error("coordinates must be an Array");
+    }
+    if (coordinates.length < 2) {
+        throw new Error("coordinates must be at least 2 numbers long");
+    }
+    if (!isNumber(coordinates[0]) || !isNumber(coordinates[1])) {
+        throw new Error("coordinates must contain numbers");
+    }
+    var geom = {
+        type: "Point",
+        coordinates: coordinates,
+    };
+    return feature(geom, properties, options);
+}
+/**
+ * Creates a {@link Point} {@link FeatureCollection} from an Array of Point coordinates.
+ *
+ * @name points
+ * @param {Array<Array<number>>} coordinates an array of Points
+ * @param {Object} [properties={}] Translate these properties to each Feature
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north]
+ * associated with the FeatureCollection
+ * @param {string|number} [options.id] Identifier associated with the FeatureCollection
+ * @returns {FeatureCollection<Point>} Point Feature
+ * @example
+ * var points = turf.points([
+ *   [-75, 39],
+ *   [-80, 45],
+ *   [-78, 50]
+ * ]);
+ *
+ * //=points
+ */
+function points(coordinates, properties, options) {
+    if (options === void 0) { options = {}; }
+    return featureCollection(coordinates.map(function (coords) {
+        return point(coords, properties);
+    }), options);
+}
+/**
+ * Creates a {@link Polygon} {@link Feature} from an Array of LinearRings.
+ *
+ * @name polygon
+ * @param {Array<Array<Array<number>>>} coordinates an array of LinearRings
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the Feature
+ * @returns {Feature<Polygon>} Polygon Feature
+ * @example
+ * var polygon = turf.polygon([[[-5, 52], [-4, 56], [-2, 51], [-7, 54], [-5, 52]]], { name: 'poly1' });
+ *
+ * //=polygon
+ */
+function polygon(coordinates, properties, options) {
+    if (options === void 0) { options = {}; }
+    for (var _i = 0, coordinates_1 = coordinates; _i < coordinates_1.length; _i++) {
+        var ring = coordinates_1[_i];
+        if (ring.length < 4) {
+            throw new Error("Each LinearRing of a Polygon must have 4 or more Positions.");
+        }
+        for (var j = 0; j < ring[ring.length - 1].length; j++) {
+            // Check if first point of Polygon contains two numbers
+            if (ring[ring.length - 1][j] !== ring[0][j]) {
+                throw new Error("First and last Position are not equivalent.");
+            }
+        }
+    }
+    var geom = {
+        type: "Polygon",
+        coordinates: coordinates,
+    };
+    return feature(geom, properties, options);
+}
+/**
+ * Creates a {@link Polygon} {@link FeatureCollection} from an Array of Polygon coordinates.
+ *
+ * @name polygons
+ * @param {Array<Array<Array<Array<number>>>>} coordinates an array of Polygon coordinates
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the FeatureCollection
+ * @returns {FeatureCollection<Polygon>} Polygon FeatureCollection
+ * @example
+ * var polygons = turf.polygons([
+ *   [[[-5, 52], [-4, 56], [-2, 51], [-7, 54], [-5, 52]]],
+ *   [[[-15, 42], [-14, 46], [-12, 41], [-17, 44], [-15, 42]]],
+ * ]);
+ *
+ * //=polygons
+ */
+function polygons(coordinates, properties, options) {
+    if (options === void 0) { options = {}; }
+    return featureCollection(coordinates.map(function (coords) {
+        return polygon(coords, properties);
+    }), options);
+}
+/**
+ * Creates a {@link LineString} {@link Feature} from an Array of Positions.
+ *
+ * @name lineString
+ * @param {Array<Array<number>>} coordinates an array of Positions
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the Feature
+ * @returns {Feature<LineString>} LineString Feature
+ * @example
+ * var linestring1 = turf.lineString([[-24, 63], [-23, 60], [-25, 65], [-20, 69]], {name: 'line 1'});
+ * var linestring2 = turf.lineString([[-14, 43], [-13, 40], [-15, 45], [-10, 49]], {name: 'line 2'});
+ *
+ * //=linestring1
+ * //=linestring2
+ */
+function lineString(coordinates, properties, options) {
+    if (options === void 0) { options = {}; }
+    if (coordinates.length < 2) {
+        throw new Error("coordinates must be an array of two or more positions");
+    }
+    var geom = {
+        type: "LineString",
+        coordinates: coordinates,
+    };
+    return feature(geom, properties, options);
+}
+/**
+ * Creates a {@link LineString} {@link FeatureCollection} from an Array of LineString coordinates.
+ *
+ * @name lineStrings
+ * @param {Array<Array<Array<number>>>} coordinates an array of LinearRings
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north]
+ * associated with the FeatureCollection
+ * @param {string|number} [options.id] Identifier associated with the FeatureCollection
+ * @returns {FeatureCollection<LineString>} LineString FeatureCollection
+ * @example
+ * var linestrings = turf.lineStrings([
+ *   [[-24, 63], [-23, 60], [-25, 65], [-20, 69]],
+ *   [[-14, 43], [-13, 40], [-15, 45], [-10, 49]]
+ * ]);
+ *
+ * //=linestrings
+ */
+function lineStrings(coordinates, properties, options) {
+    if (options === void 0) { options = {}; }
+    return featureCollection(coordinates.map(function (coords) {
+        return lineString(coords, properties);
+    }), options);
+}
+/**
+ * Takes one or more {@link Feature|Features} and creates a {@link FeatureCollection}.
+ *
+ * @name featureCollection
+ * @param {Feature[]} features input features
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the Feature
+ * @returns {FeatureCollection} FeatureCollection of Features
+ * @example
+ * var locationA = turf.point([-75.343, 39.984], {name: 'Location A'});
+ * var locationB = turf.point([-75.833, 39.284], {name: 'Location B'});
+ * var locationC = turf.point([-75.534, 39.123], {name: 'Location C'});
+ *
+ * var collection = turf.featureCollection([
+ *   locationA,
+ *   locationB,
+ *   locationC
+ * ]);
+ *
+ * //=collection
+ */
+function featureCollection(features, options) {
+    if (options === void 0) { options = {}; }
+    var fc = { type: "FeatureCollection" };
+    if (options.id) {
+        fc.id = options.id;
+    }
+    if (options.bbox) {
+        fc.bbox = options.bbox;
+    }
+    fc.features = features;
+    return fc;
+}
+/**
+ * Creates a {@link Feature<MultiLineString>} based on a
+ * coordinate array. Properties can be added optionally.
+ *
+ * @name multiLineString
+ * @param {Array<Array<Array<number>>>} coordinates an array of LineStrings
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the Feature
+ * @returns {Feature<MultiLineString>} a MultiLineString feature
+ * @throws {Error} if no coordinates are passed
+ * @example
+ * var multiLine = turf.multiLineString([[[0,0],[10,10]]]);
+ *
+ * //=multiLine
+ */
+function multiLineString(coordinates, properties, options) {
+    if (options === void 0) { options = {}; }
+    var geom = {
+        type: "MultiLineString",
+        coordinates: coordinates,
+    };
+    return feature(geom, properties, options);
+}
+/**
+ * Creates a {@link Feature<MultiPoint>} based on a
+ * coordinate array. Properties can be added optionally.
+ *
+ * @name multiPoint
+ * @param {Array<Array<number>>} coordinates an array of Positions
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the Feature
+ * @returns {Feature<MultiPoint>} a MultiPoint feature
+ * @throws {Error} if no coordinates are passed
+ * @example
+ * var multiPt = turf.multiPoint([[0,0],[10,10]]);
+ *
+ * //=multiPt
+ */
+function multiPoint(coordinates, properties, options) {
+    if (options === void 0) { options = {}; }
+    var geom = {
+        type: "MultiPoint",
+        coordinates: coordinates,
+    };
+    return feature(geom, properties, options);
+}
+/**
+ * Creates a {@link Feature<MultiPolygon>} based on a
+ * coordinate array. Properties can be added optionally.
+ *
+ * @name multiPolygon
+ * @param {Array<Array<Array<Array<number>>>>} coordinates an array of Polygons
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the Feature
+ * @returns {Feature<MultiPolygon>} a multipolygon feature
+ * @throws {Error} if no coordinates are passed
+ * @example
+ * var multiPoly = turf.multiPolygon([[[[0,0],[0,10],[10,10],[10,0],[0,0]]]]);
+ *
+ * //=multiPoly
+ *
+ */
+function multiPolygon(coordinates, properties, options) {
+    if (options === void 0) { options = {}; }
+    var geom = {
+        type: "MultiPolygon",
+        coordinates: coordinates,
+    };
+    return feature(geom, properties, options);
+}
+/**
+ * Creates a {@link Feature<GeometryCollection>} based on a
+ * coordinate array. Properties can be added optionally.
+ *
+ * @name geometryCollection
+ * @param {Array<Geometry>} geometries an array of GeoJSON Geometries
+ * @param {Object} [properties={}] an Object of key-value pairs to add as properties
+ * @param {Object} [options={}] Optional Parameters
+ * @param {Array<number>} [options.bbox] Bounding Box Array [west, south, east, north] associated with the Feature
+ * @param {string|number} [options.id] Identifier associated with the Feature
+ * @returns {Feature<GeometryCollection>} a GeoJSON GeometryCollection Feature
+ * @example
+ * var pt = turf.geometry("Point", [100, 0]);
+ * var line = turf.geometry("LineString", [[101, 0], [102, 1]]);
+ * var collection = turf.geometryCollection([pt, line]);
+ *
+ * // => collection
+ */
+function geometryCollection(geometries, properties, options) {
+    if (options === void 0) { options = {}; }
+    var geom = {
+        type: "GeometryCollection",
+        geometries: geometries,
+    };
+    return feature(geom, properties, options);
+}
+/**
+ * Round number to precision
+ *
+ * @param {number} num Number
+ * @param {number} [precision=0] Precision
+ * @returns {number} rounded number
+ * @example
+ * turf.round(120.4321)
+ * //=120
+ *
+ * turf.round(120.4321, 2)
+ * //=120.43
+ */
+function round(num, precision) {
+    if (precision === void 0) { precision = 0; }
+    if (precision && !(precision >= 0)) {
+        throw new Error("precision must be a positive number");
+    }
+    var multiplier = Math.pow(10, precision || 0);
+    return Math.round(num * multiplier) / multiplier;
+}
+/**
+ * Convert a distance measurement (assuming a spherical Earth) from radians to a more friendly unit.
+ * Valid units: miles, nauticalmiles, inches, yards, meters, metres, kilometers, centimeters, feet
+ *
+ * @name radiansToLength
+ * @param {number} radians in radians across the sphere
+ * @param {string} [units="kilometers"] can be degrees, radians, miles, inches, yards, metres,
+ * meters, kilometres, kilometers.
+ * @returns {number} distance
+ */
+function radiansToLength(radians, units) {
+    if (units === void 0) { units = "kilometers"; }
+    var factor = factors[units];
+    if (!factor) {
+        throw new Error(units + " units is invalid");
+    }
+    return radians * factor;
+}
+/**
+ * Convert a distance measurement (assuming a spherical Earth) from a real-world unit into radians
+ * Valid units: miles, nauticalmiles, inches, yards, meters, metres, kilometers, centimeters, feet
+ *
+ * @name lengthToRadians
+ * @param {number} distance in real units
+ * @param {string} [units="kilometers"] can be degrees, radians, miles, inches, yards, metres,
+ * meters, kilometres, kilometers.
+ * @returns {number} radians
+ */
+function lengthToRadians(distance, units) {
+    if (units === void 0) { units = "kilometers"; }
+    var factor = factors[units];
+    if (!factor) {
+        throw new Error(units + " units is invalid");
+    }
+    return distance / factor;
+}
+/**
+ * Convert a distance measurement (assuming a spherical Earth) from a real-world unit into degrees
+ * Valid units: miles, nauticalmiles, inches, yards, meters, metres, centimeters, kilometres, feet
+ *
+ * @name lengthToDegrees
+ * @param {number} distance in real units
+ * @param {string} [units="kilometers"] can be degrees, radians, miles, inches, yards, metres,
+ * meters, kilometres, kilometers.
+ * @returns {number} degrees
+ */
+function lengthToDegrees(distance, units) {
+    return radiansToDegrees(lengthToRadians(distance, units));
+}
+/**
+ * Converts any bearing angle from the north line direction (positive clockwise)
+ * and returns an angle between 0-360 degrees (positive clockwise), 0 being the north line
+ *
+ * @name bearingToAzimuth
+ * @param {number} bearing angle, between -180 and +180 degrees
+ * @returns {number} angle between 0 and 360 degrees
+ */
+function bearingToAzimuth(bearing) {
+    var angle = bearing % 360;
+    if (angle < 0) {
+        angle += 360;
+    }
+    return angle;
+}
+/**
+ * Converts an angle in radians to degrees
+ *
+ * @name radiansToDegrees
+ * @param {number} radians angle in radians
+ * @returns {number} degrees between 0 and 360 degrees
+ */
+function radiansToDegrees(radians) {
+    var degrees = radians % (2 * Math.PI);
+    return (degrees * 180) / Math.PI;
+}
+/**
+ * Converts an angle in degrees to radians
+ *
+ * @name degreesToRadians
+ * @param {number} degrees angle between 0 and 360 degrees
+ * @returns {number} angle in radians
+ */
+function degreesToRadians(degrees) {
+    var radians = degrees % 360;
+    return (radians * Math.PI) / 180;
+}
+/**
+ * Converts a length to the requested unit.
+ * Valid units: miles, nauticalmiles, inches, yards, meters, metres, kilometers, centimeters, feet
+ *
+ * @param {number} length to be converted
+ * @param {Units} [originalUnit="kilometers"] of the length
+ * @param {Units} [finalUnit="kilometers"] returned unit
+ * @returns {number} the converted length
+ */
+function convertLength(length, originalUnit, finalUnit) {
+    if (originalUnit === void 0) { originalUnit = "kilometers"; }
+    if (finalUnit === void 0) { finalUnit = "kilometers"; }
+    if (!(length >= 0)) {
+        throw new Error("length must be a positive number");
+    }
+    return radiansToLength(lengthToRadians(length, originalUnit), finalUnit);
+}
+/**
+ * Converts a area to the requested unit.
+ * Valid units: kilometers, kilometres, meters, metres, centimetres, millimeters, acres, miles, yards, feet, inches, hectares
+ * @param {number} area to be converted
+ * @param {Units} [originalUnit="meters"] of the distance
+ * @param {Units} [finalUnit="kilometers"] returned unit
+ * @returns {number} the converted area
+ */
+function convertArea(area, originalUnit, finalUnit) {
+    if (originalUnit === void 0) { originalUnit = "meters"; }
+    if (finalUnit === void 0) { finalUnit = "kilometers"; }
+    if (!(area >= 0)) {
+        throw new Error("area must be a positive number");
+    }
+    var startFactor = areaFactors[originalUnit];
+    if (!startFactor) {
+        throw new Error("invalid original units");
+    }
+    var finalFactor = areaFactors[finalUnit];
+    if (!finalFactor) {
+        throw new Error("invalid final units");
+    }
+    return (area / startFactor) * finalFactor;
+}
+/**
+ * isNumber
+ *
+ * @param {*} num Number to validate
+ * @returns {boolean} true/false
+ * @example
+ * turf.isNumber(123)
+ * //=true
+ * turf.isNumber('foo')
+ * //=false
+ */
+function isNumber(num) {
+    return !isNaN(num) && num !== null && !Array.isArray(num);
+}
+/**
+ * isObject
+ *
+ * @param {*} input variable to validate
+ * @returns {boolean} true/false
+ * @example
+ * turf.isObject({elevation: 10})
+ * //=true
+ * turf.isObject('foo')
+ * //=false
+ */
+function isObject(input) {
+    return !!input && input.constructor === Object;
+}
+/**
+ * Validate BBox
+ *
+ * @private
+ * @param {Array<number>} bbox BBox to validate
+ * @returns {void}
+ * @throws Error if BBox is not valid
+ * @example
+ * validateBBox([-180, -40, 110, 50])
+ * //=OK
+ * validateBBox([-180, -40])
+ * //=Error
+ * validateBBox('Foo')
+ * //=Error
+ * validateBBox(5)
+ * //=Error
+ * validateBBox(null)
+ * //=Error
+ * validateBBox(undefined)
+ * //=Error
+ */
+function validateBBox(bbox) {
+    if (!bbox) {
+        throw new Error("bbox is required");
+    }
+    if (!Array.isArray(bbox)) {
+        throw new Error("bbox must be an Array");
+    }
+    if (bbox.length !== 4 && bbox.length !== 6) {
+        throw new Error("bbox must be an Array of 4 or 6 numbers");
+    }
+    bbox.forEach(function (num) {
+        if (!isNumber(num)) {
+            throw new Error("bbox must only contain numbers");
+        }
+    });
+}
+/**
+ * Validate Id
+ *
+ * @private
+ * @param {string|number} id Id to validate
+ * @returns {void}
+ * @throws Error if Id is not valid
+ * @example
+ * validateId([-180, -40, 110, 50])
+ * //=Error
+ * validateId([-180, -40])
+ * //=Error
+ * validateId('Foo')
+ * //=OK
+ * validateId(5)
+ * //=OK
+ * validateId(null)
+ * //=Error
+ * validateId(undefined)
+ * //=Error
+ */
+function validateId(id) {
+    if (!id) {
+        throw new Error("id is required");
+    }
+    if (["string", "number"].indexOf(typeof id) === -1) {
+        throw new Error("id must be a number or a string");
+    }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/@turf/invariant/dist/es/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@turf/invariant/dist/es/index.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "collectionOf": () => (/* binding */ collectionOf),
+/* harmony export */   "containsNumber": () => (/* binding */ containsNumber),
+/* harmony export */   "featureOf": () => (/* binding */ featureOf),
+/* harmony export */   "geojsonType": () => (/* binding */ geojsonType),
+/* harmony export */   "getCoord": () => (/* binding */ getCoord),
+/* harmony export */   "getCoords": () => (/* binding */ getCoords),
+/* harmony export */   "getGeom": () => (/* binding */ getGeom),
+/* harmony export */   "getType": () => (/* binding */ getType)
+/* harmony export */ });
+/* harmony import */ var _turf_helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @turf/helpers */ "./node_modules/@turf/helpers/dist/es/index.js");
+
+/**
+ * Unwrap a coordinate from a Point Feature, Geometry or a single coordinate.
+ *
+ * @name getCoord
+ * @param {Array<number>|Geometry<Point>|Feature<Point>} coord GeoJSON Point or an Array of numbers
+ * @returns {Array<number>} coordinates
+ * @example
+ * var pt = turf.point([10, 10]);
+ *
+ * var coord = turf.getCoord(pt);
+ * //= [10, 10]
+ */
+function getCoord(coord) {
+    if (!coord) {
+        throw new Error("coord is required");
+    }
+    if (!Array.isArray(coord)) {
+        if (coord.type === "Feature" &&
+            coord.geometry !== null &&
+            coord.geometry.type === "Point") {
+            return coord.geometry.coordinates;
+        }
+        if (coord.type === "Point") {
+            return coord.coordinates;
+        }
+    }
+    if (Array.isArray(coord) &&
+        coord.length >= 2 &&
+        !Array.isArray(coord[0]) &&
+        !Array.isArray(coord[1])) {
+        return coord;
+    }
+    throw new Error("coord must be GeoJSON Point or an Array of numbers");
+}
+/**
+ * Unwrap coordinates from a Feature, Geometry Object or an Array
+ *
+ * @name getCoords
+ * @param {Array<any>|Geometry|Feature} coords Feature, Geometry Object or an Array
+ * @returns {Array<any>} coordinates
+ * @example
+ * var poly = turf.polygon([[[119.32, -8.7], [119.55, -8.69], [119.51, -8.54], [119.32, -8.7]]]);
+ *
+ * var coords = turf.getCoords(poly);
+ * //= [[[119.32, -8.7], [119.55, -8.69], [119.51, -8.54], [119.32, -8.7]]]
+ */
+function getCoords(coords) {
+    if (Array.isArray(coords)) {
+        return coords;
+    }
+    // Feature
+    if (coords.type === "Feature") {
+        if (coords.geometry !== null) {
+            return coords.geometry.coordinates;
+        }
+    }
+    else {
+        // Geometry
+        if (coords.coordinates) {
+            return coords.coordinates;
+        }
+    }
+    throw new Error("coords must be GeoJSON Feature, Geometry Object or an Array");
+}
+/**
+ * Checks if coordinates contains a number
+ *
+ * @name containsNumber
+ * @param {Array<any>} coordinates GeoJSON Coordinates
+ * @returns {boolean} true if Array contains a number
+ */
+function containsNumber(coordinates) {
+    if (coordinates.length > 1 &&
+        (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_0__.isNumber)(coordinates[0]) &&
+        (0,_turf_helpers__WEBPACK_IMPORTED_MODULE_0__.isNumber)(coordinates[1])) {
+        return true;
+    }
+    if (Array.isArray(coordinates[0]) && coordinates[0].length) {
+        return containsNumber(coordinates[0]);
+    }
+    throw new Error("coordinates must only contain numbers");
+}
+/**
+ * Enforce expectations about types of GeoJSON objects for Turf.
+ *
+ * @name geojsonType
+ * @param {GeoJSON} value any GeoJSON object
+ * @param {string} type expected GeoJSON type
+ * @param {string} name name of calling function
+ * @throws {Error} if value is not the expected type.
+ */
+function geojsonType(value, type, name) {
+    if (!type || !name) {
+        throw new Error("type and name required");
+    }
+    if (!value || value.type !== type) {
+        throw new Error("Invalid input to " +
+            name +
+            ": must be a " +
+            type +
+            ", given " +
+            value.type);
+    }
+}
+/**
+ * Enforce expectations about types of {@link Feature} inputs for Turf.
+ * Internally this uses {@link geojsonType} to judge geometry types.
+ *
+ * @name featureOf
+ * @param {Feature} feature a feature with an expected geometry type
+ * @param {string} type expected GeoJSON type
+ * @param {string} name name of calling function
+ * @throws {Error} error if value is not the expected type.
+ */
+function featureOf(feature, type, name) {
+    if (!feature) {
+        throw new Error("No feature passed");
+    }
+    if (!name) {
+        throw new Error(".featureOf() requires a name");
+    }
+    if (!feature || feature.type !== "Feature" || !feature.geometry) {
+        throw new Error("Invalid input to " + name + ", Feature with geometry required");
+    }
+    if (!feature.geometry || feature.geometry.type !== type) {
+        throw new Error("Invalid input to " +
+            name +
+            ": must be a " +
+            type +
+            ", given " +
+            feature.geometry.type);
+    }
+}
+/**
+ * Enforce expectations about types of {@link FeatureCollection} inputs for Turf.
+ * Internally this uses {@link geojsonType} to judge geometry types.
+ *
+ * @name collectionOf
+ * @param {FeatureCollection} featureCollection a FeatureCollection for which features will be judged
+ * @param {string} type expected GeoJSON type
+ * @param {string} name name of calling function
+ * @throws {Error} if value is not the expected type.
+ */
+function collectionOf(featureCollection, type, name) {
+    if (!featureCollection) {
+        throw new Error("No featureCollection passed");
+    }
+    if (!name) {
+        throw new Error(".collectionOf() requires a name");
+    }
+    if (!featureCollection || featureCollection.type !== "FeatureCollection") {
+        throw new Error("Invalid input to " + name + ", FeatureCollection required");
+    }
+    for (var _i = 0, _a = featureCollection.features; _i < _a.length; _i++) {
+        var feature = _a[_i];
+        if (!feature || feature.type !== "Feature" || !feature.geometry) {
+            throw new Error("Invalid input to " + name + ", Feature with geometry required");
+        }
+        if (!feature.geometry || feature.geometry.type !== type) {
+            throw new Error("Invalid input to " +
+                name +
+                ": must be a " +
+                type +
+                ", given " +
+                feature.geometry.type);
+        }
+    }
+}
+/**
+ * Get Geometry from Feature or Geometry Object
+ *
+ * @param {Feature|Geometry} geojson GeoJSON Feature or Geometry Object
+ * @returns {Geometry|null} GeoJSON Geometry Object
+ * @throws {Error} if geojson is not a Feature or Geometry Object
+ * @example
+ * var point = {
+ *   "type": "Feature",
+ *   "properties": {},
+ *   "geometry": {
+ *     "type": "Point",
+ *     "coordinates": [110, 40]
+ *   }
+ * }
+ * var geom = turf.getGeom(point)
+ * //={"type": "Point", "coordinates": [110, 40]}
+ */
+function getGeom(geojson) {
+    if (geojson.type === "Feature") {
+        return geojson.geometry;
+    }
+    return geojson;
+}
+/**
+ * Get GeoJSON object's type, Geometry type is prioritize.
+ *
+ * @param {GeoJSON} geojson GeoJSON object
+ * @param {string} [name="geojson"] name of the variable to display in error message (unused)
+ * @returns {string} GeoJSON type
+ * @example
+ * var point = {
+ *   "type": "Feature",
+ *   "properties": {},
+ *   "geometry": {
+ *     "type": "Point",
+ *     "coordinates": [110, 40]
+ *   }
+ * }
+ * var geom = turf.getType(point)
+ * //="Point"
+ */
+function getType(geojson, _name) {
+    if (geojson.type === "FeatureCollection") {
+        return "FeatureCollection";
+    }
+    if (geojson.type === "GeometryCollection") {
+        return "GeometryCollection";
+    }
+    if (geojson.type === "Feature" && geojson.geometry !== null) {
+        return geojson.geometry.type;
+    }
+    return geojson.type;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/nanoid/index.browser.js":
+/*!**********************************************!*\
+  !*** ./node_modules/nanoid/index.browser.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "customAlphabet": () => (/* binding */ customAlphabet),
+/* harmony export */   "customRandom": () => (/* binding */ customRandom),
+/* harmony export */   "nanoid": () => (/* binding */ nanoid),
+/* harmony export */   "random": () => (/* binding */ random),
+/* harmony export */   "urlAlphabet": () => (/* reexport safe */ _url_alphabet_index_js__WEBPACK_IMPORTED_MODULE_0__.urlAlphabet)
+/* harmony export */ });
+/* harmony import */ var _url_alphabet_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./url-alphabet/index.js */ "./node_modules/nanoid/url-alphabet/index.js");
+
+let random = bytes => crypto.getRandomValues(new Uint8Array(bytes))
+let customRandom = (alphabet, defaultSize, getRandom) => {
+  let mask = (2 << (Math.log(alphabet.length - 1) / Math.LN2)) - 1
+  let step = -~((1.6 * mask * defaultSize) / alphabet.length)
+  return (size = defaultSize) => {
+    let id = ''
+    while (true) {
+      let bytes = getRandom(step)
+      let j = step
+      while (j--) {
+        id += alphabet[bytes[j] & mask] || ''
+        if (id.length === size) return id
+      }
+    }
+  }
+}
+let customAlphabet = (alphabet, size = 21) =>
+  customRandom(alphabet, size, random)
+let nanoid = (size = 21) =>
+  crypto.getRandomValues(new Uint8Array(size)).reduce((id, byte) => {
+    byte &= 63
+    if (byte < 36) {
+      id += byte.toString(36)
+    } else if (byte < 62) {
+      id += (byte - 26).toString(36).toUpperCase()
+    } else if (byte > 62) {
+      id += '-'
+    } else {
+      id += '_'
+    }
+    return id
+  }, '')
+
+
+/***/ }),
+
+/***/ "./node_modules/nanoid/url-alphabet/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/nanoid/url-alphabet/index.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "urlAlphabet": () => (/* binding */ urlAlphabet)
+/* harmony export */ });
+const urlAlphabet =
+  'useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict'
+
 
 /***/ })
 
@@ -1179,18 +2236,6 @@ module.exports = turf;
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -1230,21 +2275,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mapbox-gl */ "mapbox-gl");
-/* harmony import */ var mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mapbox_gl__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _base_Layer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base/Layer */ "./src/base/Layer.ts");
-/* harmony import */ var _myAnimation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./myAnimation */ "./src/myAnimation.ts");
-/* harmony import */ var _base_windCircle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./base/windCircle */ "./src/base/windCircle.ts");
-
+/* harmony import */ var _base_Layer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base/Layer */ "./src/base/Layer.ts");
+/* harmony import */ var _myAnimation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./myAnimation */ "./src/myAnimation.ts");
+/* harmony import */ var _base_windCircle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base/windCircle */ "./src/base/windCircle.ts");
 
 
 
 // class
 class Typhoon {
-    constructor(map, data) {
+    constructor(mapbox, map, data) {
         this.forecastData = [];
         this.forecastLayer = [];
         this.map = map;
+        this.mapbox = mapbox;
         this.live_marker = null;
         this.data = data;
         console.log(data);
@@ -1252,19 +2295,17 @@ class Typhoon {
     }
     drawLive() {
         // 台风路径上的线 line
-        this.live_line = new _base_Layer__WEBPACK_IMPORTED_MODULE_1__.LineLayer(this.map);
+        this.live_line = new _base_Layer__WEBPACK_IMPORTED_MODULE_0__.LineLayer(this.mapbox, this.map);
         this.live_line.addLineLayer();
         // 台风路径上的点 pointer
-        this.live_circle = new _base_Layer__WEBPACK_IMPORTED_MODULE_1__.windRouteCircleLayer(this.map, []);
+        this.live_circle = new _base_Layer__WEBPACK_IMPORTED_MODULE_0__.windRouteCircleLayer(this.mapbox, this.map, []);
         this.live_circle.addCircleLayer('#333', [0, 0], 4);
         this.addForecast();
         // 台风图标
         const div = document.createElement('div');
         div.innerHTML = `<div class="img-pos"></div>`;
         let data = this.data[0].points;
-        // 风圈
-        console.log(data);
-        this.live_marker = new (mapbox_gl__WEBPACK_IMPORTED_MODULE_0___default().Marker)({ element: div });
+        this.live_marker = new this.mapbox.Marker({ element: div });
         // 渲染路径的每一步
         const callBack = (cur) => {
             this.live_line.addCoordinates(data[cur]);
@@ -1287,17 +2328,18 @@ class Typhoon {
                 }
             }
             console.log(this.live_circle);
+            // 风圈
             this.drawWindCircle(data[data.length - 1]);
         };
         // 调用动画
-        (0,_myAnimation__WEBPACK_IMPORTED_MODULE_2__["default"])({
+        (0,_myAnimation__WEBPACK_IMPORTED_MODULE_1__["default"])({
             length: this.data[0].points.length,
             successCallback: successBack,
             callBack: callBack,
         });
     }
     drawWindCircle(pointer) {
-        (0,_base_windCircle__WEBPACK_IMPORTED_MODULE_3__.createWindCircle)(this.map, pointer);
+        (0,_base_windCircle__WEBPACK_IMPORTED_MODULE_2__.createWindCircle)(this.map, pointer);
     }
     drawForecast() {
         this.forecastLayer.forEach((layer) => {
@@ -1305,7 +2347,7 @@ class Typhoon {
         });
         this.forecastLayer = [];
         this.forecastData.forEach((data) => {
-            this.forecastLayer.push(new _base_Layer__WEBPACK_IMPORTED_MODULE_1__.forecastRouterLayer(this.map, data));
+            this.forecastLayer.push(new _base_Layer__WEBPACK_IMPORTED_MODULE_0__.forecastRouterLayer(this.mapbox, this.map, data));
         });
     }
     getFeature(n, data) {
@@ -1359,6 +2401,8 @@ function getthisPoointerForecast(pointer, ratio) {
 
 })();
 
+/******/ 	return __webpack_exports__;
 /******/ })()
 ;
+});
 //# sourceMappingURL=typhoon.js.map
