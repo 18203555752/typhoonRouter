@@ -1,5 +1,6 @@
 import type mapboxgl from 'mapbox-gl';
 import type { WindCircle } from './base/windCircle';
+import './style/base.scss';
 declare class Typhoon {
     protected map: mapboxgl.Map;
     protected live_circle: any;

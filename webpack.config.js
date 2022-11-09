@@ -18,11 +18,29 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   use: ['babel-loader']
-      // },
+      //默认情况下 会将所有资源全部添加到代码里
+      {
+        test: /\.(png|svg|gif|jpe?g)$/,
+        type: 'asset',
+        generator: {
+          filename: "img/[name].[hash:4][ext]"
+        },
+        parser: {
+          dataUrlCondition: {//30kb以下使用data url，30kb以上则使用file-loader的方式
+            maxSize: 30 * 1024
+          }
+        }
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader'
+        ]
+      },
       // {
       //   test: /\.jsx?$/,
       //   use: ['babel-loader']

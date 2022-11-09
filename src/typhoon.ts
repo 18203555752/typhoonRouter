@@ -10,6 +10,7 @@ import myAnimation from './myAnimation'
 import type { AnimationParmas } from './myAnimation'
 import { createWindCircle } from './base/windCircle'
 import type { WindCircle } from './base/windCircle'
+import './style/base.scss'
 // class
 
 class Typhoon {

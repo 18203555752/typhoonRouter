@@ -1,0 +1,67 @@
+$bac__x: (
+  's6': 0,
+  's7': 0,
+  's8': -35px,
+  's9': -35px,
+  's10': -70px,
+  's11': -70px,
+  's12': -105px,
+  's13': -105px,
+  's14': -140px,
+  's15': -140px,
+  's16': -175px,
+  's17': -175px,
+  's18': -175px,
+  's19': -175px,
+  's20': -175px,
+);
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-1turn);
+  }
+}
+.mapboxgl-popup {
+  max-width: unset !important;
+}
+
+.img-pos {
+  background-image: url('./grade.png');
+  width: 34px;
+  height: 35px;
+  @each $colorKey, $color in $bac__x {
+    &.#{$colorKey} {
+      background-position-x: $color;
+    }
+  }
+  &.active {
+    animation: rotation 1s linear infinite;
+  }
+}
+.mapboxgl-popup-content {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+.windRouterPop__box {
+  width: 16rem;
+  .windRouterPop_row {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.2rem 0;
+    .row-time {
+      flex-basis: 6rem;
+      display: flex;
+      justify-content: flex-end;
+      font-size: 0.95rem;
+      font-weight: bold;
+    }
+    .row-content {
+      flex: 1;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+}
