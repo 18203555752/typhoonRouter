@@ -15,53 +15,67 @@ import './style/base.scss'
 
 class Typhoon {
   protected map: mapboxgl.Map
-  protected live_circle: any
-  protected live_line: any
-  live_marker: mapboxgl.Marker | null
+  protected live_circle: any //台风路径上的点 pointer
+  protected live_line: any //台风路径上的线 line
+  protected live_icon!: mapboxgl.Marker //台风风眼图标
   data: any
   protected forecastData: any[] = []
-  protected forecastLayer: any[] = []
+  protected forecastLayer: any[] = [] //此台风的预报路径
+  protected windCircle!: () => void
   protected mapbox: typeof mapboxgl
   constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any) {
     this.map = map
     this.mapbox = mapbox
-    this.live_marker = null
+    // this.live_icon = null
     this.data = data
     console.log(data)
     this.drawLive()
   }
-
+  remove() {
+    this.live_circle.clearLayer()
+    this.live_line.clearLayer()
+    this.live_icon.remove()
+    this.forecastLayer.forEach((layer: forecastRouterLayer) => {
+      layer.clearLayer()
+    })
+    if (this.windCircle) {
+      this.windCircle()
+    }
+  }
   drawLive() {
     // 台风路径上的线 line
     this.live_line = new LineLayer(this.mapbox, this.map)
     this.live_line.addLineLayer()
 
     // 台风路径上的点 pointer
-    this.live_circle = new windRouteCircleLayer(this.mapbox, this.map, [])
+    this.live_circle = new windRouteCircleLayer(
+      this.mapbox,
+      this.map,
+      [],
+      this.data
+    )
     this.live_circle.addCircleLayer('#333', [0, 0], 4)
     this.addForecast()
-    // 台风图标
+    // 台风风眼图标
     const div = document.createElement('div')
     div.innerHTML = `<div class="img-pos"></div>`
-    let data = this.data[0].points
-    this.live_marker = new this.mapbox.Marker({ element: div })
+    let data = this.data.points
+    this.live_icon = new this.mapbox.Marker({ element: div })
 
     // 渲染路径的每一步
     const callBack = (cur: number) => {
       this.live_line.addCoordinates(data[cur])
       this.live_circle.addFeature(this.getFeature(cur, data))
-      if (this.live_marker) {
-        const el = this.live_marker.getElement()
+      if (this.live_icon) {
+        const el = this.live_icon.getElement()
         el.innerHTML = `<div class="img-pos s${data[cur].power}"></div>`
-        this.live_marker
-          .setLngLat([data[cur].lng, data[cur].lat])
-          .addTo(this.map)
+        this.live_icon.setLngLat([data[cur].lng, data[cur].lat]).addTo(this.map)
       }
     }
     // 渲染路径完成后的成功回调
     const successBack = () => {
-      if (this.live_marker) {
-        const el = this.live_marker.getElement()
+      if (this.live_icon) {
+        const el = this.live_icon.getElement()
         const child = el.querySelector('div')
         if (child) {
           child.className += ' active'
@@ -73,13 +87,13 @@ class Typhoon {
     }
     // 调用动画
     myAnimation({
-      length: this.data[0].points.length,
+      length: this.data.points.length,
       successCallback: successBack,
       callBack: callBack,
     })
   }
   drawWindCircle(pointer: WindCircle) {
-    createWindCircle(this.map, pointer)
+    this.windCircle = createWindCircle(this.map, pointer)
   }
   drawForecast() {
     this.forecastLayer.forEach((layer) => {

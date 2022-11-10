@@ -4,20 +4,21 @@ declare type Quad = {
     sw: number;
     nw: number;
 };
+declare type strOrNum = string | number;
 export interface WindCircle {
     color: string;
     forecast: any[] | null;
     lat: number;
     lng: number;
-    move_dir: '西西北';
-    move_speed: number;
+    move_dir: strOrNum;
+    move_speed: strOrNum;
     power: number;
     pressure: number;
-    radius7: number;
+    radius7: strOrNum;
     radius7_quad: Quad;
-    radius10: number;
+    radius10: strOrNum;
     radius10_quad: Quad;
-    radius12: number;
+    radius12: strOrNum;
     radius12_quad: Quad;
     remark: string;
     speed: number;

@@ -67,7 +67,8 @@ declare class LineLayer extends BaseLayer {
 }
 declare class windRouteCircleLayer extends BaseLayer {
     protected popup: mapboxgl.Popup | null;
-    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr: any[]);
+    protected data: any;
+    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr: any[], data: any);
     /**
      * 清楚图层
      */

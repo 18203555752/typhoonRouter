@@ -5,12 +5,14 @@ declare class Typhoon {
     protected map: mapboxgl.Map;
     protected live_circle: any;
     protected live_line: any;
-    live_marker: mapboxgl.Marker | null;
+    protected live_icon: mapboxgl.Marker;
     data: any;
     protected forecastData: any[];
     protected forecastLayer: any[];
+    protected windCircle: () => void;
     protected mapbox: typeof mapboxgl;
     constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any);
+    remove(): void;
     drawLive(): void;
     drawWindCircle(pointer: WindCircle): void;
     drawForecast(): void;

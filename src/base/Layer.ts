@@ -168,9 +168,16 @@ class LineLayer extends BaseLayer {
 // 路径上的点
 class windRouteCircleLayer extends BaseLayer {
   protected popup: mapboxgl.Popup | null = null
-  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr: any[]) {
+  protected data: any
+  constructor(
+    mapbox: typeof mapboxgl,
+    map: mapboxgl.Map,
+    arr: any[],
+    data: any
+  ) {
     // this.popup
     super(mapbox, map, arr)
+    this.data = data
   }
   /**
    * 清楚图层
@@ -229,17 +236,42 @@ class windRouteCircleLayer extends BaseLayer {
   addPop(message: WindCircle) {
     //@ts-ignore
     const html = `<div class='windRouterPop__box'>
-      <div class='windRouterPop_row'> <div class='row-time'>时间： </div> <div class='row-content'>${message.time}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>当前位置： </div> <div class='row-content'>${message.lng}E/${message.lat}N</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>中心气压： </div> <div class='row-content'>${message.pressure}百帕</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>最大风速： </div> <div class='row-content'>${message.speed}米/秒</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>风力： </div> <div class='row-content'>${message.power}级</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>等级： </div> <div class='row-content'>${message.strong}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>移动速度： </div> <div class='row-content'>${message.move_speed}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${message.move_dir}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>七级半径： </div> <div class='row-content'>${message.radius7}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>十级半径： </div> <div class='row-content'>${message.radius10}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>十二级半径： </div> <div class='row-content'>${message.radius12}</div> </div>
+      <div class='windRouterPop_title'> <div class='row-content'>${
+        this.data.tfbh
+      }${this.data.name}(${this.data.ename})</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>时间： </div> <div class='row-content'>${
+        message.time
+      }</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>当前位置： </div> <div class='row-content'>${
+        message.lng
+      }E/${message.lat}N</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>中心气压： </div> <div class='row-content'>${
+        message.pressure
+      }百帕</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>最大风速： </div> <div class='row-content'>${
+        message.speed
+      }米/秒</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>风力： </div> <div class='row-content'>${
+        message.power
+      }级</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>等级： </div> <div class='row-content'>${
+        message.strong
+      }</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>移动速度： </div> <div class='row-content'>${EmptyValue(
+        message.move_speed
+      )} 公里/时</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${EmptyValue(
+        message.move_dir
+      )}</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>七级半径： </div> <div class='row-content'>${EmptyValue(
+        message.radius7
+      )}公里</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>十级半径： </div> <div class='row-content'>${EmptyValue(
+        message.radius10
+      )}公里</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>十二级半径： </div> <div class='row-content'>${EmptyValue(
+        message.radius12
+      )}公里</div> </div>
     </div>
     `
     this.popup = new this.mapbox.Popup({ closeOnClick: false })
@@ -539,6 +571,14 @@ class forecastRouterLayer {
     return html
   }
 }
+function EmptyValue(val: string | number): typeof val {
+  if (val) {
+    return val
+  } else {
+    return ''
+  }
+}
+
 export {
   BaseLayer,
   LineLayer,

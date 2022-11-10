@@ -36,7 +36,7 @@ var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@keyframes rotation {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(-1turn); } }\n\n.mapboxgl-popup {\n  max-width: unset !important; }\n\n.img-pos {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  width: 34px;\n  height: 35px; }\n  .img-pos.s6 {\n    background-position-x: 0; }\n  .img-pos.s7 {\n    background-position-x: 0; }\n  .img-pos.s8 {\n    background-position-x: -35px; }\n  .img-pos.s9 {\n    background-position-x: -35px; }\n  .img-pos.s10 {\n    background-position-x: -70px; }\n  .img-pos.s11 {\n    background-position-x: -70px; }\n  .img-pos.s12 {\n    background-position-x: -105px; }\n  .img-pos.s13 {\n    background-position-x: -105px; }\n  .img-pos.s14 {\n    background-position-x: -140px; }\n  .img-pos.s15 {\n    background-position-x: -140px; }\n  .img-pos.s16 {\n    background-position-x: -175px; }\n  .img-pos.s17 {\n    background-position-x: -175px; }\n  .img-pos.s18 {\n    background-position-x: -175px; }\n  .img-pos.s19 {\n    background-position-x: -175px; }\n  .img-pos.s20 {\n    background-position-x: -175px; }\n  .img-pos.active {\n    animation: rotation 1s linear infinite; }\n\n.mapboxgl-popup-content {\n  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); }\n\n.windRouterPop__box {\n  width: 16rem; }\n  .windRouterPop__box .windRouterPop_row {\n    display: flex;\n    justify-content: flex-start;\n    padding: 0.2rem 0; }\n    .windRouterPop__box .windRouterPop_row .row-time {\n      flex-basis: 6rem;\n      display: flex;\n      justify-content: flex-end;\n      font-size: 0.95rem;\n      font-weight: bold; }\n    .windRouterPop__box .windRouterPop_row .row-content {\n      flex: 1;\n      font-size: 0.9rem;\n      display: flex;\n      justify-content: flex-start; }\n", "",{"version":3,"sources":["webpack://./src/style/base.scss"],"names":[],"mappings":"AAiBA;EACE;IACE,uBAAuB,EAAA;EAGzB;IACE,yBAAyB,EAAA,EAAA;;AAG7B;EACE,2BAA2B,EAAA;;AAG7B;EACE,yDAAoC;EACpC,WAAW;EACX,YAAY,EAAA;EAHd;IAMM,wBAnCG,EAAA;EA6BT;IAMM,wBAlCG,EAAA;EA4BT;IAMM,4BAjCO,EAAA;EA2Bb;IAMM,4BAhCO,EAAA;EA0Bb;IAMM,4BA/BQ,EAAA;EAyBd;IAMM,4BA9BQ,EAAA;EAwBd;IAMM,6BA7BS,EAAA;EAuBf;IAMM,6BA5BS,EAAA;EAsBf;IAMM,6BA3BS,EAAA;EAqBf;IAMM,6BA1BS,EAAA;EAoBf;IAMM,6BAzBS,EAAA;EAmBf;IAMM,6BAxBS,EAAA;EAkBf;IAMM,6BAvBS,EAAA;EAiBf;IAMM,6BAtBS,EAAA;EAgBf;IAMM,6BArBS,EAAA;EAef;IAUI,sCAAsC,EAAA;;AAG1C;EACE,2CAA2C,EAAA;;AAE7C;EACE,YAAY,EAAA;EADd;IAGI,aAAa;IACb,2BAA2B;IAC3B,iBAAiB,EAAA;IALrB;MAOM,gBAAgB;MAChB,aAAa;MACb,yBAAyB;MACzB,kBAAkB;MAClB,iBAAiB,EAAA;IAXvB;MAcM,OAAO;MACP,iBAAiB;MACjB,aAAa;MACb,2BAA2B,EAAA","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@keyframes rotation {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(-1turn); } }\n\n.mapboxgl-popup {\n  max-width: unset !important; }\n\n.img-pos {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  width: 34px;\n  height: 35px; }\n  .img-pos.s6 {\n    background-position-x: 0; }\n  .img-pos.s7 {\n    background-position-x: 0; }\n  .img-pos.s8 {\n    background-position-x: -35px; }\n  .img-pos.s9 {\n    background-position-x: -35px; }\n  .img-pos.s10 {\n    background-position-x: -70px; }\n  .img-pos.s11 {\n    background-position-x: -70px; }\n  .img-pos.s12 {\n    background-position-x: -105px; }\n  .img-pos.s13 {\n    background-position-x: -105px; }\n  .img-pos.s14 {\n    background-position-x: -140px; }\n  .img-pos.s15 {\n    background-position-x: -140px; }\n  .img-pos.s16 {\n    background-position-x: -175px; }\n  .img-pos.s17 {\n    background-position-x: -175px; }\n  .img-pos.s18 {\n    background-position-x: -175px; }\n  .img-pos.s19 {\n    background-position-x: -175px; }\n  .img-pos.s20 {\n    background-position-x: -175px; }\n  .img-pos.active {\n    animation: rotation 1s linear infinite; }\n\n.mapboxgl-popup-content {\n  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);\n  border-radius: 12px;\n  padding: 0 0 0.6rem 0; }\n\n.windRouterPop__box {\n  width: 17rem; }\n  .windRouterPop__box .windRouterPop_title {\n    text-align: center;\n    background-color: #008fea;\n    padding: 0.6rem;\n    border-top-left-radius: 12px;\n    border-top-right-radius: 12px;\n    color: #fff;\n    font-size: 1.2rem; }\n  .windRouterPop__box .windRouterPop_row {\n    display: flex;\n    justify-content: flex-start;\n    padding: 0.3rem 15px; }\n    .windRouterPop__box .windRouterPop_row .row-time {\n      flex-basis: 6rem;\n      display: flex;\n      justify-content: flex-end;\n      font-size: 0.95rem;\n      font-weight: bold; }\n    .windRouterPop__box .windRouterPop_row .row-content {\n      flex: 1;\n      font-size: 0.9rem;\n      display: flex;\n      justify-content: flex-start; }\n", "",{"version":3,"sources":["webpack://./src/style/base.scss"],"names":[],"mappings":"AAiBA;EACE;IACE,uBAAuB,EAAA;EAGzB;IACE,yBAAyB,EAAA,EAAA;;AAG7B;EACE,2BAA2B,EAAA;;AAG7B;EACE,yDAAoC;EACpC,WAAW;EACX,YAAY,EAAA;EAHd;IAMM,wBAnCG,EAAA;EA6BT;IAMM,wBAlCG,EAAA;EA4BT;IAMM,4BAjCO,EAAA;EA2Bb;IAMM,4BAhCO,EAAA;EA0Bb;IAMM,4BA/BQ,EAAA;EAyBd;IAMM,4BA9BQ,EAAA;EAwBd;IAMM,6BA7BS,EAAA;EAuBf;IAMM,6BA5BS,EAAA;EAsBf;IAMM,6BA3BS,EAAA;EAqBf;IAMM,6BA1BS,EAAA;EAoBf;IAMM,6BAzBS,EAAA;EAmBf;IAMM,6BAxBS,EAAA;EAkBf;IAMM,6BAvBS,EAAA;EAiBf;IAMM,6BAtBS,EAAA;EAgBf;IAMM,6BArBS,EAAA;EAef;IAUI,sCAAsC,EAAA;;AAG1C;EACE,2CAA2C;EAC3C,mBAAmB;EACnB,qBAAqB,EAAA;;AAEvB;EACE,YAAY,EAAA;EADd;IAGI,kBAAkB;IAClB,yBAAyB;IACzB,eAAe;IACf,4BAA4B;IAC5B,6BAA6B;IAC7B,WAAW;IACX,iBAAiB,EAAA;EATrB;IAYI,aAAa;IACb,2BAA2B;IAC3B,oBAAoB,EAAA;IAdxB;MAgBM,gBAAgB;MAChB,aAAa;MACb,yBAAyB;MACzB,kBAAkB;MAClB,iBAAiB,EAAA;IApBvB;MAuBM,OAAO;MACP,iBAAiB;MACjB,aAAa;MACb,2BAA2B,EAAA","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -753,10 +753,11 @@ class LineLayer extends BaseLayer {
 }
 // 路径上的点
 class windRouteCircleLayer extends BaseLayer {
-    constructor(mapbox, map, arr) {
+    constructor(mapbox, map, arr, data) {
         // this.popup
         super(mapbox, map, arr);
         this.popup = null;
+        this.data = data;
     }
     /**
      * 清楚图层
@@ -814,17 +815,18 @@ class windRouteCircleLayer extends BaseLayer {
     addPop(message) {
         //@ts-ignore
         const html = `<div class='windRouterPop__box'>
+      <div class='windRouterPop_title'> <div class='row-content'>${this.data.tfbh}${this.data.name}(${this.data.ename})</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>时间： </div> <div class='row-content'>${message.time}</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>当前位置： </div> <div class='row-content'>${message.lng}E/${message.lat}N</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>中心气压： </div> <div class='row-content'>${message.pressure}百帕</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>最大风速： </div> <div class='row-content'>${message.speed}米/秒</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>风力： </div> <div class='row-content'>${message.power}级</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>等级： </div> <div class='row-content'>${message.strong}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>移动速度： </div> <div class='row-content'>${message.move_speed}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${message.move_dir}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>七级半径： </div> <div class='row-content'>${message.radius7}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>十级半径： </div> <div class='row-content'>${message.radius10}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>十二级半径： </div> <div class='row-content'>${message.radius12}</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>移动速度： </div> <div class='row-content'>${EmptyValue(message.move_speed)} 公里/时</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${EmptyValue(message.move_dir)}</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>七级半径： </div> <div class='row-content'>${EmptyValue(message.radius7)}公里</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>十级半径： </div> <div class='row-content'>${EmptyValue(message.radius10)}公里</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>十二级半径： </div> <div class='row-content'>${EmptyValue(message.radius12)}公里</div> </div>
     </div>
     `;
         this.popup = new this.mapbox.Popup({ closeOnClick: false })
@@ -1099,6 +1101,14 @@ class forecastRouterLayer {
             .setHTML(html)
             .addTo(this.map);
         return html;
+    }
+}
+function EmptyValue(val) {
+    if (val) {
+        return val;
+    }
+    else {
+        return '';
     }
 }
 
@@ -2914,43 +2924,52 @@ __webpack_require__.r(__webpack_exports__);
 class Typhoon {
     constructor(mapbox, map, data) {
         this.forecastData = [];
-        this.forecastLayer = [];
+        this.forecastLayer = []; //此台风的预报路径
         this.map = map;
         this.mapbox = mapbox;
-        this.live_marker = null;
+        // this.live_icon = null
         this.data = data;
         console.log(data);
         this.drawLive();
+    }
+    remove() {
+        this.live_circle.clearLayer();
+        this.live_line.clearLayer();
+        this.live_icon.remove();
+        this.forecastLayer.forEach((layer) => {
+            layer.clearLayer();
+        });
+        if (this.windCircle) {
+            this.windCircle();
+        }
     }
     drawLive() {
         // 台风路径上的线 line
         this.live_line = new _base_Layer__WEBPACK_IMPORTED_MODULE_0__.LineLayer(this.mapbox, this.map);
         this.live_line.addLineLayer();
         // 台风路径上的点 pointer
-        this.live_circle = new _base_Layer__WEBPACK_IMPORTED_MODULE_0__.windRouteCircleLayer(this.mapbox, this.map, []);
+        this.live_circle = new _base_Layer__WEBPACK_IMPORTED_MODULE_0__.windRouteCircleLayer(this.mapbox, this.map, [], this.data);
         this.live_circle.addCircleLayer('#333', [0, 0], 4);
         this.addForecast();
-        // 台风图标
+        // 台风风眼图标
         const div = document.createElement('div');
         div.innerHTML = `<div class="img-pos"></div>`;
-        let data = this.data[0].points;
-        this.live_marker = new this.mapbox.Marker({ element: div });
+        let data = this.data.points;
+        this.live_icon = new this.mapbox.Marker({ element: div });
         // 渲染路径的每一步
         const callBack = (cur) => {
             this.live_line.addCoordinates(data[cur]);
             this.live_circle.addFeature(this.getFeature(cur, data));
-            if (this.live_marker) {
-                const el = this.live_marker.getElement();
+            if (this.live_icon) {
+                const el = this.live_icon.getElement();
                 el.innerHTML = `<div class="img-pos s${data[cur].power}"></div>`;
-                this.live_marker
-                    .setLngLat([data[cur].lng, data[cur].lat])
-                    .addTo(this.map);
+                this.live_icon.setLngLat([data[cur].lng, data[cur].lat]).addTo(this.map);
             }
         };
         // 渲染路径完成后的成功回调
         const successBack = () => {
-            if (this.live_marker) {
-                const el = this.live_marker.getElement();
+            if (this.live_icon) {
+                const el = this.live_icon.getElement();
                 const child = el.querySelector('div');
                 if (child) {
                     child.className += ' active';
@@ -2962,13 +2981,13 @@ class Typhoon {
         };
         // 调用动画
         (0,_myAnimation__WEBPACK_IMPORTED_MODULE_1__["default"])({
-            length: this.data[0].points.length,
+            length: this.data.points.length,
             successCallback: successBack,
             callBack: callBack,
         });
     }
     drawWindCircle(pointer) {
-        (0,_base_windCircle__WEBPACK_IMPORTED_MODULE_2__.createWindCircle)(this.map, pointer);
+        this.windCircle = (0,_base_windCircle__WEBPACK_IMPORTED_MODULE_2__.createWindCircle)(this.map, pointer);
     }
     drawForecast() {
         this.forecastLayer.forEach((layer) => {

@@ -43,13 +43,24 @@ $bac__x: (
 }
 .mapboxgl-popup-content {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 0 0 0.6rem 0;
 }
 .windRouterPop__box {
-  width: 16rem;
+  width: 17rem;
+  .windRouterPop_title {
+    text-align: center;
+    background-color: #008fea;
+    padding: 0.6rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    color: #fff;
+    font-size: 1.2rem;
+  }
   .windRouterPop_row {
     display: flex;
     justify-content: flex-start;
-    padding: 0.2rem 0;
+    padding: 0.3rem 15px;
     .row-time {
       flex-basis: 6rem;
       display: flex;
