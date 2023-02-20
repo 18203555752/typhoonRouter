@@ -1,5 +1,4 @@
 import type mapbox from 'mapbox-gl';
-export declare const PUBLIC_URL: string | undefined;
 interface TxtLayerOP {
     [key: string]: any;
     textAllowOverlap?: boolean;

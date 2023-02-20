@@ -64,7 +64,7 @@ export function createWindCircle(map: any, pointer: WindCircle) {
 
   return function () {
     if (radius7) radius7.clearLayer()
-    if (quad10) radius10.clearLayer()
+    if (radius10) radius10.clearLayer()
     if (radius12) radius12.clearLayer()
   }
 }

@@ -6,9 +6,16 @@ module.exports = {
   mode: 'development',
   entry: './src/typhoon.ts',
   devtool: 'nosources-source-map',
+  experiments: {
+    outputModule: true,
+  }, 
   output: {
     filename: 'typhoon.js',
-    libraryTarget: 'umd',	//umd表所有模块化规范的集合
+    // libraryTarget: 'umd',	//umd表所有模块化规范的集合
+    // libraryTarget: 'module',	//umd表所有模块化规范的集合
+    library: {
+      type: "module"
+    },
     path: path.resolve(__dirname, 'dist')
   },
   target: 'web',

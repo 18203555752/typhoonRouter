@@ -1,10 +1,10 @@
-declare type Quad = {
+type Quad = {
     ne: number;
     se: number;
     sw: number;
     nw: number;
 };
-declare type strOrNum = string | number;
+type strOrNum = string | number;
 export interface WindCircle {
     color: string;
     forecast: any[] | null;

@@ -1,6 +1,6 @@
 import type mapbox from 'mapbox-gl'
 
-export const PUBLIC_URL = process.env.BASE_URL
+// export const PUBLIC_URL = process.env.BASE_URL
 interface TxtLayerOP {
   [key: string]: any
   textAllowOverlap?: boolean // 取消碰撞

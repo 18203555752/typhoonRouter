@@ -11,6 +11,7 @@ import type { AnimationParmas } from './myAnimation'
 import { createWindCircle } from './base/windCircle'
 import type { WindCircle } from './base/windCircle'
 import './style/base.scss'
+import * as turf from '@turf/turf'
 // class
 
 class Typhoon {
@@ -23,6 +24,7 @@ class Typhoon {
   protected forecastLayer: any[] = [] //此台风的预报路径
   protected windCircle!: () => void
   protected mapbox: typeof mapboxgl
+  protected center: [number, number] | undefined
   constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any) {
     this.map = map
     this.mapbox = mapbox
@@ -30,6 +32,7 @@ class Typhoon {
     this.data = data
     console.log(data)
     this.drawLive()
+    this.backCenter()
   }
   remove() {
     this.live_circle.clearLayer()
@@ -41,6 +44,28 @@ class Typhoon {
     if (this.windCircle) {
       this.windCircle()
     }
+  }
+  backCenter() {
+    const pointers = this.data.points
+    const frist = [ Number(pointers[0].lng), Number(pointers[0].lat) ]
+    const polygon = turf.polygon([[...pointers.map((item: any)=> [Number(item.lng), Number(item.lat)]), frist]])
+    // debugger
+    this.center = turf.centroid(polygon).geometry.coordinates as [number, number]
+    // const lngs = polygon.geometry.coordinates[0].map((item)=> item[0])
+    // const lats = polygon.geometry.coordinates[0].map((item)=> item[1])
+    // const maxLon = Math.max(...lngs)
+    // const minLon = Math.min(...lngs)
+    // const maxLat = Math.max(...lats)
+    // const minLat = Math.min(...lats)
+    
+    this.map.flyTo({
+      center: this.center ,
+      zoom:4.3 ,
+      bearing: 0,
+      speed: 3, // make the flying slow
+      curve: 1, // change the speed at which it zooms out
+      easing: function (t) { return t; }
+    });
   }
   drawLive() {
     // 台风路径上的线 line
