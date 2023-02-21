@@ -41,11 +41,20 @@ $bac__x: (
     animation: rotation 1s linear infinite;
   }
 }
-.mapboxgl-popup-content {
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
-  padding: 0 0 0.6rem 0;
+.tyRouter-content{
+  
+  .mapboxgl-popup-content {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 0 0 0.6rem 0;
+  }
 }
+.tyRouter-name{
+  .mapboxgl-popup-content {
+    padding: 6px 10px 6px;
+  }
+}
+
 .windRouterPop__box {
   width: 17rem;
   .windRouterPop_title {

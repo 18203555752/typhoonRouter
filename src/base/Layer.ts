@@ -1,4 +1,4 @@
-import type { MapboxGeoJSONFeature } from 'mapbox-gl'
+import type { MapboxGeoJSONFeature, PointLike } from 'mapbox-gl'
 import type mapboxgl from 'mapbox-gl'
 // import mapbox from 'mapbox-gl'
 import mapUtil from './mapBox'
@@ -167,7 +167,8 @@ class LineLayer extends BaseLayer {
 
 // 路径上的点
 class windRouteCircleLayer extends BaseLayer {
-  protected popup: mapboxgl.Popup | null = null
+  protected popup: mapboxgl.Popup | null = null  
+  protected popup_name: mapboxgl.Popup | null = null  
   protected data: any
   constructor(
     mapbox: typeof mapboxgl,
@@ -185,7 +186,7 @@ class windRouteCircleLayer extends BaseLayer {
   clearLayer() {
     this.removeLayer()
     this.removeSource()
-
+    this.popup_name?.remove()
     // this.map.off('click', this.layers[0].id, this.mouseClickFunc)
   }
 
@@ -232,7 +233,23 @@ class windRouteCircleLayer extends BaseLayer {
     this.map.getCanvas().style.cursor = ''
     if (this.popup) this.popup.remove()
   }
-
+  addNamePop(data: any) {
+    //@ts-ignore
+    const html = `<div class='box'>
+      <span>${data.tfbh}</span>
+      <span>${data.name}</span>
+    </div>
+    `
+    const message = data.points[0]
+    const popupOffsets = {
+      left: [5, 0] as PointLike
+    }
+    this.popup_name = new this.mapbox.Popup({offset: popupOffsets, anchor: 'left', closeOnClick: false ,closeButton: false, className: 'tyRouter-name'})
+      .setLngLat([message.lng, message.lat])
+      .setHTML(html)
+      .addTo(this.map)
+    return html
+  }
   addPop(message: WindCircle) {
     //@ts-ignore
     const html = `<div class='windRouterPop__box'>
@@ -274,7 +291,7 @@ class windRouteCircleLayer extends BaseLayer {
       )}公里</div> </div>
     </div>
     `
-    this.popup = new this.mapbox.Popup({ closeOnClick: false })
+    this.popup = new this.mapbox.Popup({ closeOnClick: false , className: 'tyRouter-content'})
       .setLngLat([message.lng, message.lat])
       .setHTML(html)
       .addTo(this.map)
@@ -564,7 +581,7 @@ class forecastRouterLayer {
     </div>
     `
 
-    this.popup = new this.mapbox.Popup({ closeOnClick: false })
+    this.popup = new this.mapbox.Popup({ closeOnClick: false, className: 'tyRouter-content' })
       .setLngLat([message.lng, message.lat])
       .setHTML(html)
       .addTo(this.map)

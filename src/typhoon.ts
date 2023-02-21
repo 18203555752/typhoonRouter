@@ -80,13 +80,15 @@ class Typhoon {
       this.data
     )
     this.live_circle.addCircleLayer('#333', [0, 0], 4)
+    
     this.addForecast()
     // 台风风眼图标
     const div = document.createElement('div')
     div.innerHTML = `<div class="img-pos"></div>`
     let data = this.data.points
     this.live_icon = new this.mapbox.Marker({ element: div })
-
+    // 默认第一个点添加路径名称
+    this.live_circle.addNamePop(this.data)
     // 渲染路径的每一步
     const callBack = (cur: number) => {
       this.live_line.addCoordinates(data[cur])
