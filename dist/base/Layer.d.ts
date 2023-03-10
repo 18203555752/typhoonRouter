@@ -49,6 +49,7 @@ declare class BaseLayer {
      */
     addCircleLayer(color?: string, offset?: number[], size?: number): this;
     addFeature(item: any): void;
+    setFeature(features: any): void;
 }
 /**
  * 台风路径实线
@@ -64,9 +65,11 @@ declare class LineLayer extends BaseLayer {
      */
     addLineLayer(): this;
     addCoordinates(item: any): void;
+    setCoordinates(data: any): void;
 }
 declare class windRouteCircleLayer extends BaseLayer {
     protected popup: mapboxgl.Popup | null;
+    protected popup_name: mapboxgl.Popup | null;
     protected data: any;
     constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr: any[], data: any);
     /**
@@ -91,6 +94,7 @@ declare class windRouteCircleLayer extends BaseLayer {
      * @param e 当前pointer的对象
      */
     mouseOutFunc(): void;
+    addNamePop(data: any): string;
     addPop(message: WindCircle): string;
 }
 declare class WindCircleLayer {
@@ -120,6 +124,7 @@ declare class WindCircleLayer {
             features: any[];
         };
     };
+    refresh(center: number[], arr: number[]): void;
     clearLayer(): void;
 }
 /**

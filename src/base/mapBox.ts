@@ -33,7 +33,7 @@ class MapBox {
    * @param geojson
    */
   getLineLayer(defaultOp = {}) {
-    console.log(defaultOp)
+    // console.log(defaultOp)
     const lineLayer: mapbox.LineLayer = {
       id: 'line',
       type: 'line',
@@ -107,7 +107,7 @@ class MapBox {
       's20',
       '#fa3030',
     ]
-    console.log(defaultOp)
+    // console.log(defaultOp)
     const op = {
       id: 'labelLayer',
       size: 12,
@@ -344,7 +344,7 @@ class MapBox {
   ) {
     let obj = {}
     if (name) {
-      console.log(name, '232323')
+      // console.log(name, '232323')
       obj = {
         'text-field': `{${name}}` /* 使用text标签显示的值，Feature属性使用{域名}格式*/,
         // 'text-font': ['wind'],

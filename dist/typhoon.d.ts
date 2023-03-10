@@ -9,13 +9,26 @@ declare class Typhoon {
     data: any;
     protected forecastData: any[];
     protected forecastLayer: any[];
-    protected windCircle: () => void;
+    protected windCircle: any;
     protected mapbox: typeof mapboxgl;
     protected center: [number, number] | undefined;
-    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any);
+    protected closeAnimation: any;
+    protected loaded: () => void;
+    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any, loaded: () => void);
+    reDraw(): void;
     remove(): void;
+    removeForecast(): void;
+    removeWindCircle(): void;
     backCenter(): void;
+    /**
+     * 初始化台风路径，带动画的绘制
+     */
     drawLive(): void;
+    private refreshLive_icon;
+    /**
+     * 任意时间段--绘制从开始到任意点的路径
+     */
+    anyDraw(index?: number): void;
     drawWindCircle(pointer: WindCircle): void;
     drawForecast(): void;
     getFeature(n: number, data: any[]): {
@@ -26,6 +39,7 @@ declare class Typhoon {
         };
         properties: any;
     };
+    getFeatures(data: any[]): any[];
     /**
      * 添加预报路径
      */

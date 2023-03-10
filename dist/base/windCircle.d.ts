@@ -31,5 +31,8 @@ export interface WindCircle {
  * @param pointer
  * @returns
  */
-export declare function createWindCircle(map: any, pointer: WindCircle): () => void;
+export declare function createWindCircle(map: any, pointer: WindCircle): {
+    refresh: (pointer: WindCircle) => void;
+    clear: () => void;
+};
 export {};

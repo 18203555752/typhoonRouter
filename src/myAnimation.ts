@@ -9,8 +9,9 @@ export default function myAnimation(parmas: AnimationParmas) {
   const length = parmas.length - 1
   const callBack = parmas.callBack
   const successCallback = parmas.successCallback
+  let looped: number | null
   const looping = () => {
-    let looped: number | null = requestAnimationFrame(looping)
+    looped = requestAnimationFrame(looping)
     // console.log(current)
     if (current < length) {
       callBack(current)
@@ -25,4 +26,11 @@ export default function myAnimation(parmas: AnimationParmas) {
   }
 
   looping()
+
+  return function() {
+    if( looped ){
+      cancelAnimationFrame(looped)
+      looped = null
+    }
+  }
 }

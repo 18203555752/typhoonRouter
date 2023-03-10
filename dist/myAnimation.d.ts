@@ -3,4 +3,4 @@ export interface AnimationParmas {
     callBack: (cur: number) => void;
     successCallback?: () => void;
 }
-export default function myAnimation(parmas: AnimationParmas): void;
+export default function myAnimation(parmas: AnimationParmas): () => void;

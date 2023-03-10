@@ -107,6 +107,14 @@ class BaseLayer {
     //@ts-ignore
     this.map.getSource(this.sourceId).setData(this.geoJson.data)
   }
+
+  setFeature(features: any) {
+    this.geoJson.data.features = features
+    // this.geoJson.data.features[0].geometry.coordinates.push(...item.geometry.coordinates)
+    //@ts-ignore
+    this.map.getSource(this.sourceId).setData(this.geoJson.data)
+  }
+
 }
 
 /**
@@ -139,7 +147,7 @@ class LineLayer extends BaseLayer {
       'line-join': 'round',
     }
     const paint = {
-      'line-color': '#333',
+      'line-color': '#00F5FF',
       'line-width': 2,
       'line-opacity': 0.8,
     }
@@ -153,7 +161,7 @@ class LineLayer extends BaseLayer {
     this.layers.push(layer)
     return this
   }
-
+  // 向lineLayer 逐个添加 point 
   addCoordinates(item: any) {
     // this.geoJson.data.features.push(item)
     this.geoJson.data.features[0].geometry.coordinates.push([
@@ -161,6 +169,16 @@ class LineLayer extends BaseLayer {
       item.lat,
     ])
     //@ts-ignore
+    this.map.getSource(this.sourceId).setData(this.geoJson.data)
+  }
+  // 一次性设置好整条线的数据
+  setCoordinates(data: any) {
+    const coordinates: any[] = []
+    data.forEach((item: any)=> {
+      coordinates.push([item.lng, item.lat])
+    })
+    this.geoJson.data.features[0].geometry.coordinates = coordinates
+     //@ts-ignore
     this.map.getSource(this.sourceId).setData(this.geoJson.data)
   }
 }
@@ -375,7 +393,15 @@ class WindCircleLayer {
     }
     return geoJson
   }
-
+  // 
+  refresh(center: number[], arr: number[],) {
+    const coordinates: any[] = []
+    this.arr = arr
+    this.center = center
+    this.getFeatures()
+     //@ts-ignore
+    this.map.getSource(this.sourceId).setData(this.geoJson.data)
+  }
   clearLayer() {
     this.map.getLayer(this.layer!.id) && this.map.removeLayer(this.layer!.id)
     this.map.getSource(this.sourceId) && this.map.removeSource(this.sourceId)
