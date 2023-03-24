@@ -1,7 +1,7 @@
 const path = require('path')
 const { DefinePlugin } = require('webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
+const {BundleAnalyzerPlugin} = require("webpack-bundle-analyzer")
 module.exports = {
   mode: 'development',
   entry: './src/typhoon.ts',
@@ -66,6 +66,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
     new DefinePlugin({
       BASE_URL: '"./"'
     })

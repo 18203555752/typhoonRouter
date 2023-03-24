@@ -2722,7 +2722,7 @@ var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@keyframes rotation {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(-1turn); } }\n\n.mapboxgl-popup {\n  max-width: unset !important; }\n\n.img-pos {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  width: 34px;\n  height: 35px; }\n  .img-pos.s6 {\n    background-position-x: 0; }\n  .img-pos.s7 {\n    background-position-x: 0; }\n  .img-pos.s8 {\n    background-position-x: -35px; }\n  .img-pos.s9 {\n    background-position-x: -35px; }\n  .img-pos.s10 {\n    background-position-x: -70px; }\n  .img-pos.s11 {\n    background-position-x: -70px; }\n  .img-pos.s12 {\n    background-position-x: -105px; }\n  .img-pos.s13 {\n    background-position-x: -105px; }\n  .img-pos.s14 {\n    background-position-x: -140px; }\n  .img-pos.s15 {\n    background-position-x: -140px; }\n  .img-pos.s16 {\n    background-position-x: -175px; }\n  .img-pos.s17 {\n    background-position-x: -175px; }\n  .img-pos.s18 {\n    background-position-x: -175px; }\n  .img-pos.s19 {\n    background-position-x: -175px; }\n  .img-pos.s20 {\n    background-position-x: -175px; }\n  .img-pos.active {\n    animation: rotation 1s linear infinite; }\n\n.tyRouter-content .mapboxgl-popup-content {\n  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);\n  border-radius: 12px;\n  padding: 0 0 0.6rem 0; }\n\n.tyRouter-name .mapboxgl-popup-content {\n  padding: 6px 10px 6px; }\n\n.windRouterPop__box {\n  width: 17rem; }\n  .windRouterPop__box .windRouterPop_title {\n    text-align: center;\n    background-color: #008fea;\n    padding: 0.6rem;\n    border-top-left-radius: 12px;\n    border-top-right-radius: 12px;\n    color: #fff;\n    font-size: 1.2rem; }\n  .windRouterPop__box .windRouterPop_row {\n    display: flex;\n    justify-content: flex-start;\n    padding: 0.3rem 15px; }\n    .windRouterPop__box .windRouterPop_row .row-time {\n      flex-basis: 6rem;\n      display: flex;\n      justify-content: flex-end;\n      font-size: 0.95rem;\n      font-weight: bold; }\n    .windRouterPop__box .windRouterPop_row .row-content {\n      flex: 1;\n      font-size: 0.9rem;\n      display: flex;\n      justify-content: flex-start; }\n", "",{"version":3,"sources":["webpack://./src/style/base.scss"],"names":[],"mappings":"AAiBA;EACE;IACE,uBAAuB,EAAA;EAGzB;IACE,yBAAyB,EAAA,EAAA;;AAG7B;EACE,2BAA2B,EAAA;;AAG7B;EACE,yDAAoC;EACpC,WAAW;EACX,YAAY,EAAA;EAHd;IAMM,wBAnCG,EAAA;EA6BT;IAMM,wBAlCG,EAAA;EA4BT;IAMM,4BAjCO,EAAA;EA2Bb;IAMM,4BAhCO,EAAA;EA0Bb;IAMM,4BA/BQ,EAAA;EAyBd;IAMM,4BA9BQ,EAAA;EAwBd;IAMM,6BA7BS,EAAA;EAuBf;IAMM,6BA5BS,EAAA;EAsBf;IAMM,6BA3BS,EAAA;EAqBf;IAMM,6BA1BS,EAAA;EAoBf;IAMM,6BAzBS,EAAA;EAmBf;IAMM,6BAxBS,EAAA;EAkBf;IAMM,6BAvBS,EAAA;EAiBf;IAMM,6BAtBS,EAAA;EAgBf;IAMM,6BArBS,EAAA;EAef;IAUI,sCAAsC,EAAA;;AAG1C;EAGI,2CAA2C;EAC3C,mBAAmB;EACnB,qBAAqB,EAAA;;AAGzB;EAEI,qBAAqB,EAAA;;AAIzB;EACE,YAAY,EAAA;EADd;IAGI,kBAAkB;IAClB,yBAAyB;IACzB,eAAe;IACf,4BAA4B;IAC5B,6BAA6B;IAC7B,WAAW;IACX,iBAAiB,EAAA;EATrB;IAYI,aAAa;IACb,2BAA2B;IAC3B,oBAAoB,EAAA;IAdxB;MAgBM,gBAAgB;MAChB,aAAa;MACb,yBAAyB;MACzB,kBAAkB;MAClB,iBAAiB,EAAA;IApBvB;MAuBM,OAAO;MACP,iBAAiB;MACjB,aAAa;MACb,2BAA2B,EAAA","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@keyframes rotation {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(-1turn); } }\n\n.mapboxgl-popup {\n  max-width: unset !important; }\n\n.img-pos {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  width: 34px;\n  height: 35px;\n  animation: rotation 1s linear 0.3s infinite; }\n  .img-pos.s6 {\n    background-position-x: 0; }\n  .img-pos.s7 {\n    background-position-x: 0; }\n  .img-pos.s8 {\n    background-position-x: -35px; }\n  .img-pos.s9 {\n    background-position-x: -35px; }\n  .img-pos.s10 {\n    background-position-x: -70px; }\n  .img-pos.s11 {\n    background-position-x: -70px; }\n  .img-pos.s12 {\n    background-position-x: -105px; }\n  .img-pos.s13 {\n    background-position-x: -105px; }\n  .img-pos.s14 {\n    background-position-x: -140px; }\n  .img-pos.s15 {\n    background-position-x: -140px; }\n  .img-pos.s16 {\n    background-position-x: -175px; }\n  .img-pos.s17 {\n    background-position-x: -175px; }\n  .img-pos.s18 {\n    background-position-x: -175px; }\n  .img-pos.s19 {\n    background-position-x: -175px; }\n  .img-pos.s20 {\n    background-position-x: -175px; }\n\n.tyRouter-content .mapboxgl-popup-content {\n  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);\n  border-radius: 12px;\n  padding: 0 0 0.6rem 0; }\n\n.tyRouter-name .mapboxgl-popup-content {\n  padding: 6px 10px 6px; }\n\n.windRouterPop__box {\n  width: 17rem; }\n  .windRouterPop__box .windRouterPop_title {\n    text-align: center;\n    background-color: #008fea;\n    padding: 0.6rem;\n    border-top-left-radius: 12px;\n    border-top-right-radius: 12px;\n    color: #fff;\n    font-size: 1.2rem; }\n  .windRouterPop__box .windRouterPop_row {\n    display: flex;\n    justify-content: flex-start;\n    padding: 0.3rem 15px; }\n    .windRouterPop__box .windRouterPop_row .row-time {\n      flex-basis: 6rem;\n      display: flex;\n      justify-content: flex-end;\n      font-size: 0.95rem;\n      font-weight: bold; }\n    .windRouterPop__box .windRouterPop_row .row-content {\n      flex: 1;\n      font-size: 0.9rem;\n      display: flex;\n      justify-content: flex-start; }\n", "",{"version":3,"sources":["webpack://./src/style/base.scss"],"names":[],"mappings":"AAiBA;EACE;IACE,uBAAuB,EAAA;EAGzB;IACE,yBAAyB,EAAA,EAAA;;AAG7B;EACE,2BAA2B,EAAA;;AAG7B;EACE,yDAAoC;EACpC,WAAW;EACX,YAAY;EACZ,2CAA2C,EAAA;EAJ7C;IAOM,wBApCG,EAAA;EA6BT;IAOM,wBAnCG,EAAA;EA4BT;IAOM,4BAlCO,EAAA;EA2Bb;IAOM,4BAjCO,EAAA;EA0Bb;IAOM,4BAhCQ,EAAA;EAyBd;IAOM,4BA/BQ,EAAA;EAwBd;IAOM,6BA9BS,EAAA;EAuBf;IAOM,6BA7BS,EAAA;EAsBf;IAOM,6BA5BS,EAAA;EAqBf;IAOM,6BA3BS,EAAA;EAoBf;IAOM,6BA1BS,EAAA;EAmBf;IAOM,6BAzBS,EAAA;EAkBf;IAOM,6BAxBS,EAAA;EAiBf;IAOM,6BAvBS,EAAA;EAgBf;IAOM,6BAtBS,EAAA;;AA0Bf;EAGI,2CAA2C;EAC3C,mBAAmB;EACnB,qBAAqB,EAAA;;AAGzB;EAEI,qBAAqB,EAAA;;AAIzB;EACE,YAAY,EAAA;EADd;IAGI,kBAAkB;IAClB,yBAAyB;IACzB,eAAe;IACf,4BAA4B;IAC5B,6BAA6B;IAC7B,WAAW;IACX,iBAAiB,EAAA;EATrB;IAYI,aAAa;IACb,2BAA2B;IAC3B,oBAAoB,EAAA;IAdxB;MAgBM,gBAAgB;MAChB,aAAa;MACb,yBAAyB;MACzB,kBAAkB;MAClB,iBAAiB,EAAA;IApBvB;MAuBM,OAAO;MACP,iBAAiB;MACjB,aAAa;MACb,2BAA2B,EAAA","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -19138,7 +19138,9 @@ class forecastRouterLayer {
         this.mapbox = mapbox;
         this.circleJson = this.getJeoJson(data);
         this.lineJson = this.getLineJson(data);
-        this.addLineLayer();
+        let strokeColor = '#7EAEC6';
+        strokeColor = data[0].strokeColor ? data[0].strokeColor : strokeColor;
+        this.addLineLayer(strokeColor);
         this.addCircleLayer();
     }
     /**
@@ -19188,10 +19190,21 @@ class forecastRouterLayer {
         return this.map;
     }
     // 生成pointer的geoJson
+    // el.color = 's' + el.power
+    //   return {
+    //     type: 'Feature',
+    //     geometry: {
+    //       type: 'Point',
+    //       coordinates: [Number(el.lng), Number(el.lat)],
+    //     },
+    //     properties: el,
+    //   }
     getJeoJson(pointers) {
         let pointerArr = [];
         pointers.forEach((item, index) => {
             if (!index)
+                return;
+            if (item.speed >= 9999)
                 return;
             const el = item;
             el.color = 's' + el.power;
@@ -19258,7 +19271,7 @@ class forecastRouterLayer {
         this.map.on('mouseleave', id, this.mouseOutFunc.bind(this));
         return this;
     }
-    addLineLayer() {
+    addLineLayer(strokeColor) {
         const id = 'line_' + (0,nanoid__WEBPACK_IMPORTED_MODULE_2__.nanoid)();
         this.addSource(id, this.lineJson);
         const layout = {
@@ -19266,7 +19279,7 @@ class forecastRouterLayer {
             'line-join': 'round',
         };
         const paint = {
-            'line-color': '#333',
+            'line-color': strokeColor,
             'line-width': 2,
             'line-opacity': 0.8,
             'line-dasharray': [2, 4],
@@ -19311,16 +19324,17 @@ class forecastRouterLayer {
     addPop(message) {
         //@ts-ignore
         const html = `<div class='windRouterPop__box'>
+      <div class='windRouterPop_row'> <div class='row-time'>预报机构： </div> <div class='row-content'>${message.issuer}</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>时间： </div> <div class='row-content'>${message.time}</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>当前位置： </div> <div class='row-content'>${message.lng}E/${message.lat}N</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>中心气压： </div> <div class='row-content'>${message.pressure}百帕</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>中心气压： </div> <div class='row-content'>${message.pressure == 9999 ? '--' : message.pressure} 百帕</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>最大风速： </div> <div class='row-content'>${message.speed}米/秒</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>风力： </div> <div class='row-content'>${message.power}级</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>等级： </div> <div class='row-content'>${message.strong}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>移动速度： </div> <div class='row-content'>${message.move_speed}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${message.move_dir}</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>等级： </div> <div class='row-content'>${message.strong ? message.strong : '--'}</div> </div>
     </div>
     `;
+        //   <div class='windRouterPop_row'> <div class='row-time'>移动速度： </div> <div class='row-content'>${message.move_speed}</div> </div>
+        //   <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${message.move_dir}</div> </div>
         this.popup = new this.mapbox.Popup({ closeOnClick: false, className: 'tyRouter-content' })
             .setLngLat([message.lng, message.lat])
             .setHTML(html)
@@ -19403,6 +19417,8 @@ class MapBox {
      */
     getMakerCircleLayer(defaultOp = {}) {
         let typhoonColors = [
+            's5',
+            '#30fc31',
             's6',
             '#30fc31',
             's7',
@@ -19878,7 +19894,7 @@ function myAnimation(parmas) {
   \*****************************/
 /***/ ((module) => {
 
-module.exports = "data:image/png;base64,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";
+module.exports = "data:image/png;base64,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";
 
 /***/ }),
 
@@ -41574,16 +41590,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// class
-// console.log(mapbox, '11111111111111111')
 class Typhoon {
-    constructor(mapbox, map, data, loaded) {
+    constructor(mapbox, map, data, loaded, forecastType) {
         this.forecastData = [];
-        this.forecastLayer = []; //此台风的预报路径
+        this.forecastLayer = {}; //此台风的预报路径
         this.map = map;
         this.mapbox = mapbox;
         this.loaded = loaded;
-        // console.log(mapbox)
+        this.forecastType = forecastType;
+        Object.keys(forecastType).forEach((item) => {
+            this.forecastLayer[item] = null;
+        });
         this.data = data;
         // console.log(data)
         this.drawLive();
@@ -41606,9 +41623,12 @@ class Typhoon {
         this.removeWindCircle();
     }
     removeForecast() {
-        this.forecastLayer.forEach((layer) => {
-            layer.clearLayer();
-        });
+        for (let i in this.forecastLayer) {
+            if (this.forecastLayer[i]) {
+                this.forecastLayer[i].clearLayer();
+            }
+            this.forecastLayer[i] = null;
+        }
     }
     removeWindCircle() {
         if (this.windCircle) {
@@ -41661,17 +41681,9 @@ class Typhoon {
         };
         // 渲染路径完成后的成功回调
         const successBack = () => {
-            if (this.live_icon) {
-                const el = this.live_icon.getElement();
-                const child = el.querySelector('div');
-                if (child) {
-                    child.className += ' active';
-                }
-            }
-            // console.log(this.live_circle)
             // 风圈
             this.drawWindCircle(data[data.length - 1]);
-            // this.addForecast()
+            this.drawForecast(data[data.length - 1]);
             this.loaded();
         };
         // 调用动画
@@ -41684,15 +41696,18 @@ class Typhoon {
     refreshLive_icon(point) {
         if (this.live_icon) {
             const el = this.live_icon.getElement();
-            el.innerHTML = `<div class="img-pos s${point.power}"></div>`;
+            el.innerHTML = `<div class="img-pos s${point.power} "></div>`;
             this.live_icon.setLngLat([point.lng, point.lat]).addTo(this.map);
         }
     }
     /**
-     * 任意时间段--绘制从开始到任意点的路径
+     * @desc 任意时间段--绘制从开始到任意点的路径
+     * @param {number} index  自定义绘制的终点
+     * @param {boolean} isAnimate  是否被 动画animate函数调用
+     * @return {void}
      */
-    anyDraw(index) {
-        if (!index)
+    anyDraw(index, isAnimate) {
+        if (index < 0)
             index = this.data.points.length - 1;
         this.removeForecast();
         const data = this.data.points.slice(0, index + 1);
@@ -41701,18 +41716,34 @@ class Typhoon {
         this.refreshLive_icon(data[data.length - 1]);
         // console.log(data[data.length - 2], data[data.length - 1])
         this.windCircle.refresh(data[data.length - 1]);
+        if (!isAnimate)
+            this.drawForecast(data[data.length - 1]);
     }
     drawWindCircle(pointer) {
         this.windCircle = (0,_base_windCircle__WEBPACK_IMPORTED_MODULE_2__.createWindCircle)(this.map, pointer);
     }
-    drawForecast() {
-        this.forecastLayer.forEach((layer) => {
-            layer.clearLayer();
-        });
-        this.forecastLayer = [];
+    /**
+     * @desc 添加预报路径
+     * @param {WindCircle} pointer 实况点
+     */
+    drawForecast(pointer) {
+        this.forecastData = pointer.forecast;
+        this.removeForecast();
         this.forecastData.forEach((data) => {
-            this.forecastLayer.push(new _base_Layer__WEBPACK_IMPORTED_MODULE_0__.forecastRouterLayer(this.mapbox, this.map, data));
+            if (!this.forecastType[data[1].issuer])
+                return;
+            this.forecastLayer[data[1].issuer] = (new _base_Layer__WEBPACK_IMPORTED_MODULE_0__.forecastRouterLayer(this.mapbox, this.map, data));
         });
+    }
+    checkForecast(type) {
+        if (this.forecastType[type]) {
+            const findData = this.forecastData.find((item) => item[1].issuer === type);
+            this.forecastLayer[type] = new _base_Layer__WEBPACK_IMPORTED_MODULE_0__.forecastRouterLayer(this.mapbox, this.map, findData);
+        }
+        else {
+            this.forecastLayer[type] && this.forecastLayer[type].clearLayer();
+            this.forecastLayer[type] = null;
+        }
     }
     getFeature(n, data) {
         const el = data[n];
@@ -41741,40 +41772,6 @@ class Typhoon {
         });
         return Features;
     }
-    /**
-     * 添加预报路径
-     */
-    addForecast() {
-        this.map.on('click', this.live_circle.layers[0].id, (e) => {
-            if (e.features) {
-                // console.log(e.features[0].properties)
-                this.forecastData = [
-                    getthisPoointerForecast(e.features[0].properties, 0.5),
-                    getthisPoointerForecast(e.features[0].properties, 0.8),
-                ];
-                // console.log(this.forecastData)
-                this.drawForecast();
-            }
-        });
-    }
-}
-function getthisPoointerForecast(pointer, ratio) {
-    let arr = [];
-    for (let i = 0; i < 6; i++) {
-        let lng = pointer.lng + ratio * (Math.random() * i);
-        let lat = pointer.lat + ratio * i;
-        arr.push({
-            color: '8',
-            forecast: null,
-            lat,
-            lng,
-            move_dir: '西西北',
-            move_speed: 25,
-            power: 8,
-            pressure: 998,
-        });
-    }
-    return arr;
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Typhoon);
 

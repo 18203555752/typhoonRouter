@@ -13,8 +13,7 @@ import { createWindCircle } from './base/windCircle'
 import type { WindCircle } from './base/windCircle'
 import './style/base.scss'
 import * as turf from '@turf/turf'
-// class
-// console.log(mapbox, '11111111111111111')
+
 class Typhoon {
   protected map: mapboxgl.Map
   protected live_circle: any //台风路径上的点 pointer
@@ -22,17 +21,22 @@ class Typhoon {
   protected live_icon!: mapboxgl.Marker //台风风眼图标
   data: any
   protected forecastData: any[] = []
-  protected forecastLayer: any[] = [] //此台风的预报路径
+  protected forecastLayer: {[x:string]: forecastRouterLayer | null} = {} //此台风的预报路径
   protected windCircle!: any
   protected mapbox: typeof mapboxgl
   protected center: [number, number] | undefined
-  protected closeAnimation: any
+  protected closeAnimation: any 
+  protected forecastType: any 
   protected loaded: ()=>void
-  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any, loaded: ()=>void) {
+  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any, loaded: ()=>void, forecastType: {[x:string]: boolean}) {
     this.map = map
     this.mapbox = mapbox
     this.loaded = loaded
-    // console.log(mapbox)
+    this.forecastType = forecastType
+    Object.keys(forecastType).forEach((item)=> {
+      this.forecastLayer[item] = null
+    })
+    
     this.data = data
     // console.log(data)
     this.drawLive()
@@ -55,9 +59,12 @@ class Typhoon {
     this.removeWindCircle()    
   }
   removeForecast() {
-    this.forecastLayer.forEach((layer: forecastRouterLayer) => {
-      layer.clearLayer()
-    })    
+    for(let i in this.forecastLayer) {
+      if(this.forecastLayer[i]) {
+        this.forecastLayer[i]!.clearLayer()
+      }
+      this.forecastLayer[i] = null
+    }
   }
 
   removeWindCircle() {
@@ -120,17 +127,9 @@ class Typhoon {
     }
     // 渲染路径完成后的成功回调
     const successBack = () => {
-      if (this.live_icon) {
-        const el = this.live_icon.getElement()
-        const child = el.querySelector('div')
-        if (child) {
-          child.className += ' active'
-        }
-      }
-      // console.log(this.live_circle)
       // 风圈
       this.drawWindCircle(data[data.length - 1])
-      // this.addForecast()
+      this.drawForecast(data[data.length - 1])
       this.loaded()
     }
     // 调用动画
@@ -143,15 +142,18 @@ class Typhoon {
   private refreshLive_icon(point: any) {
     if (this.live_icon) {
       const el = this.live_icon.getElement()
-      el.innerHTML = `<div class="img-pos s${point.power}"></div>`
+      el.innerHTML = `<div class="img-pos s${point.power} "></div>`
       this.live_icon.setLngLat([point.lng, point.lat]).addTo(this.map)
     }
   }
   /**
-   * 任意时间段--绘制从开始到任意点的路径
+   * @desc 任意时间段--绘制从开始到任意点的路径
+   * @param {number} index  自定义绘制的终点
+   * @param {boolean} isAnimate  是否被 动画animate函数调用
+   * @return {void}
    */
-  anyDraw(index?: number) {
-    if(!index) index = this.data.points.length - 1
+  anyDraw(index: number, isAnimate: boolean) {
+    if(index< 0) index = this.data.points.length - 1
     this.removeForecast()
     const data = this.data.points.slice(0, index+1)
     this.live_line.setCoordinates(data)
@@ -161,20 +163,38 @@ class Typhoon {
     // console.log(data[data.length - 2], data[data.length - 1])
 
     this.windCircle.refresh(data[data.length - 1])
+    if(!isAnimate) this.drawForecast(data[data.length - 1])
+    
   }
   drawWindCircle(pointer: WindCircle) {
     this.windCircle = createWindCircle(this.map, pointer)
   }
-  drawForecast() {
-    this.forecastLayer.forEach((layer) => {
-      layer.clearLayer()
-    })
-    this.forecastLayer = []
+  /**
+   * @desc 添加预报路径
+   * @param {WindCircle} pointer 实况点
+   */
+  drawForecast(pointer: WindCircle) {
+    this.forecastData = pointer.forecast!
+    this.removeForecast()
     this.forecastData.forEach((data) => {
-      this.forecastLayer.push(
+      
+      if(!this.forecastType[data[1].issuer]) return
+      this.forecastLayer[data[1].issuer] = (
         new forecastRouterLayer(this.mapbox, this.map, data)
       )
     })
+  }
+  
+  checkForecast(type: string ) {
+    
+    if(this.forecastType[type]){
+      const findData = this.forecastData.find((item)=> item[1].issuer === type)
+      
+      this.forecastLayer[type] = new forecastRouterLayer(this.mapbox, this.map, findData)
+    }else{
+      this.forecastLayer[type] && this.forecastLayer[type]!.clearLayer()
+      this.forecastLayer[type] = null
+    }
   }
   getFeature(n: number, data: any[]) {
     const el = data[n]
@@ -205,41 +225,6 @@ class Typhoon {
     
     return Features
   }
-
-  /**
-   * 添加预报路径
-   */
-  addForecast() {
-    this.map.on('click', this.live_circle.layers[0].id, (e: HasFeater) => {
-      if (e.features) {
-        // console.log(e.features[0].properties)
-        this.forecastData = [
-          getthisPoointerForecast(e.features[0].properties, 0.5),
-          getthisPoointerForecast(e.features[0].properties, 0.8),
-        ]
-        // console.log(this.forecastData)
-        this.drawForecast()
-      }
-    })
-  }
 }
 
-function getthisPoointerForecast(pointer: any, ratio: number) {
-  let arr = []
-  for (let i = 0; i < 6; i++) {
-    let lng = pointer.lng + ratio * (Math.random() * i)
-    let lat = pointer.lat + ratio * i
-    arr.push({
-      color: '8',
-      forecast: null,
-      lat,
-      lng,
-      move_dir: '西西北',
-      move_speed: 25,
-      power: 8,
-      pressure: 998,
-    })
-  }
-  return arr
-}
 export default Typhoon

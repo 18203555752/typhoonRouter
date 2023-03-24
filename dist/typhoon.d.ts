@@ -1,4 +1,5 @@
 import type mapboxgl from 'mapbox-gl';
+import { forecastRouterLayer } from './base/Layer';
 import type { WindCircle } from './base/windCircle';
 import './style/base.scss';
 declare class Typhoon {
@@ -8,13 +9,18 @@ declare class Typhoon {
     protected live_icon: mapboxgl.Marker;
     data: any;
     protected forecastData: any[];
-    protected forecastLayer: any[];
+    protected forecastLayer: {
+        [x: string]: forecastRouterLayer | null;
+    };
     protected windCircle: any;
     protected mapbox: typeof mapboxgl;
     protected center: [number, number] | undefined;
     protected closeAnimation: any;
+    protected forecastType: any;
     protected loaded: () => void;
-    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any, loaded: () => void);
+    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: any, loaded: () => void, forecastType: {
+        [x: string]: boolean;
+    });
     reDraw(): void;
     remove(): void;
     removeForecast(): void;
@@ -26,11 +32,19 @@ declare class Typhoon {
     drawLive(): void;
     private refreshLive_icon;
     /**
-     * 任意时间段--绘制从开始到任意点的路径
+     * @desc 任意时间段--绘制从开始到任意点的路径
+     * @param {number} index  自定义绘制的终点
+     * @param {boolean} isAnimate  是否被 动画animate函数调用
+     * @return {void}
      */
-    anyDraw(index?: number): void;
+    anyDraw(index: number, isAnimate: boolean): void;
     drawWindCircle(pointer: WindCircle): void;
-    drawForecast(): void;
+    /**
+     * @desc 添加预报路径
+     * @param {WindCircle} pointer 实况点
+     */
+    drawForecast(pointer: WindCircle): void;
+    checkForecast(type: string): void;
     getFeature(n: number, data: any[]): {
         type: string;
         geometry: {
@@ -40,9 +54,5 @@ declare class Typhoon {
         properties: any;
     };
     getFeatures(data: any[]): any[];
-    /**
-     * 添加预报路径
-     */
-    addForecast(): void;
 }
 export default Typhoon;

@@ -76,6 +76,8 @@ class MapBox {
    */
   getMakerCircleLayer(defaultOp = {}) {
     let typhoonColors: string[] = [
+      's5',
+      '#30fc31',
       's6',
       '#30fc31',
       's7',

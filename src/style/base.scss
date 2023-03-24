@@ -32,13 +32,11 @@ $bac__x: (
   background-image: url('./grade.png');
   width: 34px;
   height: 35px;
+  animation: rotation 1s linear 0.3s infinite;
   @each $colorKey, $color in $bac__x {
     &.#{$colorKey} {
       background-position-x: $color;
     }
-  }
-  &.active {
-    animation: rotation 1s linear infinite;
   }
 }
 .tyRouter-content{

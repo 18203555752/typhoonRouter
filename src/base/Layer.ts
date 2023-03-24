@@ -425,7 +425,9 @@ class forecastRouterLayer {
     this.mapbox = mapbox
     this.circleJson = this.getJeoJson(data)
     this.lineJson = this.getLineJson(data)
-    this.addLineLayer()
+    let strokeColor: string = '#7EAEC6'
+    strokeColor = data[0].strokeColor ? data[0].strokeColor : strokeColor
+    this.addLineLayer(strokeColor)
     this.addCircleLayer()
   }
   /**
@@ -474,10 +476,21 @@ class forecastRouterLayer {
     return this.map
   }
   // 生成pointer的geoJson
+
+  // el.color = 's' + el.power
+  //   return {
+  //     type: 'Feature',
+  //     geometry: {
+  //       type: 'Point',
+  //       coordinates: [Number(el.lng), Number(el.lat)],
+  //     },
+  //     properties: el,
+  //   }
   protected getJeoJson(pointers: Array<WindCircle>) {
     let pointerArr: any = []
     pointers.forEach((item, index) => {
       if (!index) return
+      if(item.speed >= 9999) return
       const el = item
       el.color = 's' + el.power
       pointerArr.push({
@@ -544,7 +557,7 @@ class forecastRouterLayer {
     return this
   }
 
-  addLineLayer() {
+  addLineLayer(strokeColor : string) {
     const id = 'line_' + nanoid()
     this.addSource(id, this.lineJson)
     const layout = {
@@ -552,7 +565,7 @@ class forecastRouterLayer {
       'line-join': 'round',
     }
     const paint = {
-      'line-color': '#333',
+      'line-color': strokeColor,
       'line-width': 2,
       'line-opacity': 0.8,
       'line-dasharray': [2, 4],
@@ -596,16 +609,17 @@ class forecastRouterLayer {
   addPop(message: any) {
     //@ts-ignore
     const html = `<div class='windRouterPop__box'>
+      <div class='windRouterPop_row'> <div class='row-time'>预报机构： </div> <div class='row-content'>${message.issuer}</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>时间： </div> <div class='row-content'>${message.time}</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>当前位置： </div> <div class='row-content'>${message.lng}E/${message.lat}N</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>中心气压： </div> <div class='row-content'>${message.pressure}百帕</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>中心气压： </div> <div class='row-content'>${message.pressure == 9999 ? '--' : message.pressure} 百帕</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>最大风速： </div> <div class='row-content'>${message.speed}米/秒</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>风力： </div> <div class='row-content'>${message.power}级</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>等级： </div> <div class='row-content'>${message.strong}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>移动速度： </div> <div class='row-content'>${message.move_speed}</div> </div>
-      <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${message.move_dir}</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>等级： </div> <div class='row-content'>${message.strong ? message.strong :'--' }</div> </div>
     </div>
     `
+    //   <div class='windRouterPop_row'> <div class='row-time'>移动速度： </div> <div class='row-content'>${message.move_speed}</div> </div>
+    //   <div class='windRouterPop_row'> <div class='row-time'>移动方向： </div> <div class='row-content'>${message.move_dir}</div> </div>
 
     this.popup = new this.mapbox.Popup({ closeOnClick: false, className: 'tyRouter-content' })
       .setLngLat([message.lng, message.lat])

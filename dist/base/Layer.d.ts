@@ -186,7 +186,7 @@ declare class forecastRouterLayer {
      * @returns this
      */
     addCircleLayer(color?: string, offset?: number[], size?: number): this;
-    addLineLayer(): this;
+    addLineLayer(strokeColor: string): this;
     /**
      * 鼠标移入pointer事件
      * @param e 当前pointer的对象
