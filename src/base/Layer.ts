@@ -199,7 +199,7 @@ class windRouteCircleLayer extends BaseLayer {
     this.data = data
   }
   /**
-   * 清楚图层
+   * @desc 清除图层
    */
   clearLayer() {
     this.removeLayer()
@@ -209,7 +209,7 @@ class windRouteCircleLayer extends BaseLayer {
   }
 
   /**
-   * 添加图层
+   * @desc 添加图层
    * @param key property中字段名称
    * @param offset number[] 偏移量
    * @param anchor 显示位置
@@ -232,7 +232,7 @@ class windRouteCircleLayer extends BaseLayer {
     return this
   }
   /**
-   * 鼠标移入pointer事件
+   * @desc 鼠标移入pointer事件
    * @param e 当前pointer的对象
    */
   mouseEnterFunc(e: HasFeater) {
@@ -244,7 +244,7 @@ class windRouteCircleLayer extends BaseLayer {
     }
   }
   /**
-   * 鼠标移出pointer事件
+   * @desc 鼠标移出pointer事件
    * @param e 当前pointer的对象
    */
   mouseOutFunc() {
@@ -327,17 +327,23 @@ class WindCircleLayer {
   layer: mapboxgl.Layer | null = null
   protected color: string
   sourceId: any
-
+  protected popup_name: mapboxgl.Popup | null = null
+  mapbox: typeof mapboxgl
+  protected name: string
   constructor(
+    mapbox: typeof mapboxgl,
     map: mapboxgl.Map,
     center: number[],
     arr: number[],
-    color: string = '#78C5BB'
+    color: string = '#78C5BB',
+    name: string = '风圈'
   ) {
+    this.mapbox = mapbox
     this.color = color
     this.map = map
     this.arr = arr
     this.center = center
+    this.name = name
     this.getFeatures()
     this.addSource(this.geoJson)
   }
@@ -363,7 +369,7 @@ class WindCircleLayer {
     this.geoJson = this.getJeoJson([feature])
   }
   /**
-   * 增加数据源
+   * @desc 增加数据源
    */
   protected addSource(source: any) {
     this.sourceId = this.sourceId || nanoid()
@@ -371,16 +377,56 @@ class WindCircleLayer {
     return this.map
   }
   /**
-   * 画风圈
+   * @desc 画风圈
    * @returns
    */
   addCircleLayer() {
     const layer = mapUtil.drawFillPolygon(this.sourceId, 0.4)
     this.map.addLayer(layer)
     this.layer = layer
+    this.map.on('mouseenter', this.layer.id, this.showWindRadius)
+    this.map.on('mousemove', this.layer.id, this.moveWindRadius)
+    this.map.on('mouseleave', this.layer.id, this.removePop)
     return this
   }
 
+  /**
+   * @desc 风圈添加鼠标移动事件
+   * @returns
+   */
+  showWindRadius = (e: HasFeater)=> {
+    // console.log(e)
+    this.addPop(e.lngLat)
+  }
+  moveWindRadius = (e: HasFeater)=> {
+    // console.log(e)
+    this.movePop(e.lngLat)
+  }
+  addPop(pointLike: any) {
+    this.removePop()
+    const html = `<div class='box'>
+      <span>${this.name}: (</span>
+      <span>东北${this.arr[3]}km， </span>
+      <span>东南${this.arr[2]}km， </span>
+      <span>西南${this.arr[1]}km， </span>
+      <span>西北${this.arr[0]}km )</span>
+    </div>
+    `
+    const popupOffsets = {
+      left: [5, 0] as PointLike
+    }
+    this.popup_name = new this.mapbox.Popup({offset: popupOffsets, anchor: 'left', closeOnClick: false ,closeButton: false, className: 'tyRouter-name'})
+      .setLngLat([pointLike.lng, pointLike.lat])
+      .setHTML(html)
+      .addTo(this.map)
+    return html
+  }
+  removePop = ()=> {
+     if(this.popup_name ) this.popup_name.remove()
+  }
+  movePop = (pointLike: any)=> {
+    if(this.popup_name) this.popup_name.setLngLat([pointLike.lng, pointLike.lat])    
+  }
   // 生成geoJson
   protected getJeoJson(arr: Array<any>) {
     let geoJson = {

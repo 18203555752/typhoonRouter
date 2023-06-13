@@ -42,14 +42,42 @@ $bac__x: (
 .tyRouter-content{
   
   .mapboxgl-popup-content {
+    background-color: #fff;
+    color: #2c3e50;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
     border-radius: 12px;
     padding: 0 0 0.6rem 0;
+  }
+  &.mapboxgl-popup-anchor-left .mapboxgl-popup-tip{
+    border-right-color: #fff;
+  }
+  &.mapboxgl-popup-anchor-right .mapboxgl-popup-tip{
+    border-left-color: #fff;
+  }
+  &.mapboxgl-popup-anchor-top .mapboxgl-popup-tip{
+    border-bottom-color: #fff;
+  }
+  &.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip  {
+    border-top-color: #fff;
   }
 }
 .tyRouter-name{
   .mapboxgl-popup-content {
     padding: 6px 10px 6px;
+    background-color: #fff;
+    color: #2c3e50;
+  }
+  &.mapboxgl-popup-anchor-left .mapboxgl-popup-tip{
+    border-right-color: #fff;
+  }
+  &.mapboxgl-popup-anchor-right .mapboxgl-popup-tip{
+    border-left-color: #fff;
+  }
+  &.mapboxgl-popup-anchor-top .mapboxgl-popup-tip{
+    border-bottom-color: #fff;
+  }
+  &.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip  {
+    border-top-color: #fff;
   }
 }
 

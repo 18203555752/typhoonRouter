@@ -167,7 +167,7 @@ class Typhoon {
     
   }
   drawWindCircle(pointer: WindCircle) {
-    this.windCircle = createWindCircle(this.map, pointer)
+    this.windCircle = createWindCircle(this.mapbox, this.map, pointer)
   }
   /**
    * @desc 添加预报路径

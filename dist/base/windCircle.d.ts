@@ -1,3 +1,4 @@
+import mapboxgl from 'mapbox-gl';
 type Quad = {
     ne: number;
     se: number;
@@ -31,7 +32,7 @@ export interface WindCircle {
  * @param pointer
  * @returns
  */
-export declare function createWindCircle(map: any, pointer: WindCircle): {
+export declare function createWindCircle(mapbox: typeof mapboxgl, map: any, pointer: WindCircle): {
     refresh: (pointer: WindCircle) => void;
     clear: () => void;
 };

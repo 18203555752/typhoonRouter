@@ -2722,7 +2722,7 @@ var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@keyframes rotation {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(-1turn); } }\n\n.mapboxgl-popup {\n  max-width: unset !important; }\n\n.img-pos {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  width: 34px;\n  height: 35px;\n  animation: rotation 1s linear 0.3s infinite; }\n  .img-pos.s6 {\n    background-position-x: 0; }\n  .img-pos.s7 {\n    background-position-x: 0; }\n  .img-pos.s8 {\n    background-position-x: -35px; }\n  .img-pos.s9 {\n    background-position-x: -35px; }\n  .img-pos.s10 {\n    background-position-x: -70px; }\n  .img-pos.s11 {\n    background-position-x: -70px; }\n  .img-pos.s12 {\n    background-position-x: -105px; }\n  .img-pos.s13 {\n    background-position-x: -105px; }\n  .img-pos.s14 {\n    background-position-x: -140px; }\n  .img-pos.s15 {\n    background-position-x: -140px; }\n  .img-pos.s16 {\n    background-position-x: -175px; }\n  .img-pos.s17 {\n    background-position-x: -175px; }\n  .img-pos.s18 {\n    background-position-x: -175px; }\n  .img-pos.s19 {\n    background-position-x: -175px; }\n  .img-pos.s20 {\n    background-position-x: -175px; }\n\n.tyRouter-content .mapboxgl-popup-content {\n  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);\n  border-radius: 12px;\n  padding: 0 0 0.6rem 0; }\n\n.tyRouter-name .mapboxgl-popup-content {\n  padding: 6px 10px 6px; }\n\n.windRouterPop__box {\n  width: 17rem; }\n  .windRouterPop__box .windRouterPop_title {\n    text-align: center;\n    background-color: #008fea;\n    padding: 0.6rem;\n    border-top-left-radius: 12px;\n    border-top-right-radius: 12px;\n    color: #fff;\n    font-size: 1.2rem; }\n  .windRouterPop__box .windRouterPop_row {\n    display: flex;\n    justify-content: flex-start;\n    padding: 0.3rem 15px; }\n    .windRouterPop__box .windRouterPop_row .row-time {\n      flex-basis: 6rem;\n      display: flex;\n      justify-content: flex-end;\n      font-size: 0.95rem;\n      font-weight: bold; }\n    .windRouterPop__box .windRouterPop_row .row-content {\n      flex: 1;\n      font-size: 0.9rem;\n      display: flex;\n      justify-content: flex-start; }\n", "",{"version":3,"sources":["webpack://./src/style/base.scss"],"names":[],"mappings":"AAiBA;EACE;IACE,uBAAuB,EAAA;EAGzB;IACE,yBAAyB,EAAA,EAAA;;AAG7B;EACE,2BAA2B,EAAA;;AAG7B;EACE,yDAAoC;EACpC,WAAW;EACX,YAAY;EACZ,2CAA2C,EAAA;EAJ7C;IAOM,wBApCG,EAAA;EA6BT;IAOM,wBAnCG,EAAA;EA4BT;IAOM,4BAlCO,EAAA;EA2Bb;IAOM,4BAjCO,EAAA;EA0Bb;IAOM,4BAhCQ,EAAA;EAyBd;IAOM,4BA/BQ,EAAA;EAwBd;IAOM,6BA9BS,EAAA;EAuBf;IAOM,6BA7BS,EAAA;EAsBf;IAOM,6BA5BS,EAAA;EAqBf;IAOM,6BA3BS,EAAA;EAoBf;IAOM,6BA1BS,EAAA;EAmBf;IAOM,6BAzBS,EAAA;EAkBf;IAOM,6BAxBS,EAAA;EAiBf;IAOM,6BAvBS,EAAA;EAgBf;IAOM,6BAtBS,EAAA;;AA0Bf;EAGI,2CAA2C;EAC3C,mBAAmB;EACnB,qBAAqB,EAAA;;AAGzB;EAEI,qBAAqB,EAAA;;AAIzB;EACE,YAAY,EAAA;EADd;IAGI,kBAAkB;IAClB,yBAAyB;IACzB,eAAe;IACf,4BAA4B;IAC5B,6BAA6B;IAC7B,WAAW;IACX,iBAAiB,EAAA;EATrB;IAYI,aAAa;IACb,2BAA2B;IAC3B,oBAAoB,EAAA;IAdxB;MAgBM,gBAAgB;MAChB,aAAa;MACb,yBAAyB;MACzB,kBAAkB;MAClB,iBAAiB,EAAA;IApBvB;MAuBM,OAAO;MACP,iBAAiB;MACjB,aAAa;MACb,2BAA2B,EAAA","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "@keyframes rotation {\n  0% {\n    transform: rotate(0deg); }\n  100% {\n    transform: rotate(-1turn); } }\n\n.mapboxgl-popup {\n  max-width: unset !important; }\n\n.img-pos {\n  background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  width: 34px;\n  height: 35px;\n  animation: rotation 1s linear 0.3s infinite; }\n  .img-pos.s6 {\n    background-position-x: 0; }\n  .img-pos.s7 {\n    background-position-x: 0; }\n  .img-pos.s8 {\n    background-position-x: -35px; }\n  .img-pos.s9 {\n    background-position-x: -35px; }\n  .img-pos.s10 {\n    background-position-x: -70px; }\n  .img-pos.s11 {\n    background-position-x: -70px; }\n  .img-pos.s12 {\n    background-position-x: -105px; }\n  .img-pos.s13 {\n    background-position-x: -105px; }\n  .img-pos.s14 {\n    background-position-x: -140px; }\n  .img-pos.s15 {\n    background-position-x: -140px; }\n  .img-pos.s16 {\n    background-position-x: -175px; }\n  .img-pos.s17 {\n    background-position-x: -175px; }\n  .img-pos.s18 {\n    background-position-x: -175px; }\n  .img-pos.s19 {\n    background-position-x: -175px; }\n  .img-pos.s20 {\n    background-position-x: -175px; }\n\n.tyRouter-content .mapboxgl-popup-content {\n  background-color: #fff;\n  color: #2c3e50;\n  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);\n  border-radius: 12px;\n  padding: 0 0 0.6rem 0; }\n\n.tyRouter-content.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {\n  border-right-color: #fff; }\n\n.tyRouter-content.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {\n  border-left-color: #fff; }\n\n.tyRouter-content.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {\n  border-bottom-color: #fff; }\n\n.tyRouter-content.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {\n  border-top-color: #fff; }\n\n.tyRouter-name .mapboxgl-popup-content {\n  padding: 6px 10px 6px;\n  background-color: #fff;\n  color: #2c3e50; }\n\n.tyRouter-name.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {\n  border-right-color: #fff; }\n\n.tyRouter-name.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {\n  border-left-color: #fff; }\n\n.tyRouter-name.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {\n  border-bottom-color: #fff; }\n\n.tyRouter-name.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {\n  border-top-color: #fff; }\n\n.windRouterPop__box {\n  width: 17rem; }\n  .windRouterPop__box .windRouterPop_title {\n    text-align: center;\n    background-color: #008fea;\n    padding: 0.6rem;\n    border-top-left-radius: 12px;\n    border-top-right-radius: 12px;\n    color: #fff;\n    font-size: 1.2rem; }\n  .windRouterPop__box .windRouterPop_row {\n    display: flex;\n    justify-content: flex-start;\n    padding: 0.3rem 15px; }\n    .windRouterPop__box .windRouterPop_row .row-time {\n      flex-basis: 6rem;\n      display: flex;\n      justify-content: flex-end;\n      font-size: 0.95rem;\n      font-weight: bold; }\n    .windRouterPop__box .windRouterPop_row .row-content {\n      flex: 1;\n      font-size: 0.9rem;\n      display: flex;\n      justify-content: flex-start; }\n", "",{"version":3,"sources":["webpack://./src/style/base.scss"],"names":[],"mappings":"AAiBA;EACE;IACE,uBAAuB,EAAA;EAGzB;IACE,yBAAyB,EAAA,EAAA;;AAG7B;EACE,2BAA2B,EAAA;;AAG7B;EACE,yDAAoC;EACpC,WAAW;EACX,YAAY;EACZ,2CAA2C,EAAA;EAJ7C;IAOM,wBApCG,EAAA;EA6BT;IAOM,wBAnCG,EAAA;EA4BT;IAOM,4BAlCO,EAAA;EA2Bb;IAOM,4BAjCO,EAAA;EA0Bb;IAOM,4BAhCQ,EAAA;EAyBd;IAOM,4BA/BQ,EAAA;EAwBd;IAOM,6BA9BS,EAAA;EAuBf;IAOM,6BA7BS,EAAA;EAsBf;IAOM,6BA5BS,EAAA;EAqBf;IAOM,6BA3BS,EAAA;EAoBf;IAOM,6BA1BS,EAAA;EAmBf;IAOM,6BAzBS,EAAA;EAkBf;IAOM,6BAxBS,EAAA;EAiBf;IAOM,6BAvBS,EAAA;EAgBf;IAOM,6BAtBS,EAAA;;AA0Bf;EAGI,sBAAsB;EACtB,cAAc;EACd,2CAA2C;EAC3C,mBAAmB;EACnB,qBAAqB,EAAA;;AAPzB;EAUI,wBAAwB,EAAA;;AAV5B;EAaI,uBAAuB,EAAA;;AAb3B;EAgBI,yBAAyB,EAAA;;AAhB7B;EAmBI,sBAAsB,EAAA;;AAG1B;EAEI,qBAAqB;EACrB,sBAAsB;EACtB,cAAc,EAAA;;AAJlB;EAOI,wBAAwB,EAAA;;AAP5B;EAUI,uBAAuB,EAAA;;AAV3B;EAaI,yBAAyB,EAAA;;AAb7B;EAgBI,sBAAsB,EAAA;;AAI1B;EACE,YAAY,EAAA;EADd;IAGI,kBAAkB;IAClB,yBAAyB;IACzB,eAAe;IACf,4BAA4B;IAC5B,6BAA6B;IAC7B,WAAW;IACX,iBAAiB,EAAA;EATrB;IAYI,aAAa;IACb,2BAA2B;IAC3B,oBAAoB,EAAA;IAdxB;MAgBM,gBAAgB;MAChB,aAAa;MACb,yBAAyB;MACzB,kBAAkB;MAClB,iBAAiB,EAAA;IApBvB;MAuBM,OAAO;MACP,iBAAiB;MACjB,aAAa;MACb,2BAA2B,EAAA","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18957,7 +18957,7 @@ class windRouteCircleLayer extends BaseLayer {
         this.data = data;
     }
     /**
-     * 清楚图层
+     * @desc 清除图层
      */
     clearLayer() {
         var _a;
@@ -18967,7 +18967,7 @@ class windRouteCircleLayer extends BaseLayer {
         // this.map.off('click', this.layers[0].id, this.mouseClickFunc)
     }
     /**
-     * 添加图层
+     * @desc 添加图层
      * @param key property中字段名称
      * @param offset number[] 偏移量
      * @param anchor 显示位置
@@ -18990,7 +18990,7 @@ class windRouteCircleLayer extends BaseLayer {
         return this;
     }
     /**
-     * 鼠标移入pointer事件
+     * @desc 鼠标移入pointer事件
      * @param e 当前pointer的对象
      */
     mouseEnterFunc(e) {
@@ -19003,7 +19003,7 @@ class windRouteCircleLayer extends BaseLayer {
         }
     }
     /**
-     * 鼠标移出pointer事件
+     * @desc 鼠标移出pointer事件
      * @param e 当前pointer的对象
      */
     mouseOutFunc() {
@@ -19054,14 +19054,37 @@ class windRouteCircleLayer extends BaseLayer {
 }
 // 风圈
 class WindCircleLayer {
-    constructor(map, center, arr, color = '#78C5BB') {
+    constructor(mapbox, map, center, arr, color = '#78C5BB', name = '风圈') {
         this.step = 180;
         this.geoJson = null;
         this.layer = null;
+        this.popup_name = null;
+        /**
+         * @desc 风圈添加鼠标移动事件
+         * @returns
+         */
+        this.showWindRadius = (e) => {
+            // console.log(e)
+            this.addPop(e.lngLat);
+        };
+        this.moveWindRadius = (e) => {
+            // console.log(e)
+            this.movePop(e.lngLat);
+        };
+        this.removePop = () => {
+            if (this.popup_name)
+                this.popup_name.remove();
+        };
+        this.movePop = (pointLike) => {
+            if (this.popup_name)
+                this.popup_name.setLngLat([pointLike.lng, pointLike.lat]);
+        };
+        this.mapbox = mapbox;
         this.color = color;
         this.map = map;
         this.arr = arr;
         this.center = center;
+        this.name = name;
         this.getFeatures();
         this.addSource(this.geoJson);
     }
@@ -19083,7 +19106,7 @@ class WindCircleLayer {
         this.geoJson = this.getJeoJson([feature]);
     }
     /**
-     * 增加数据源
+     * @desc 增加数据源
      */
     addSource(source) {
         this.sourceId = this.sourceId || (0,nanoid__WEBPACK_IMPORTED_MODULE_2__.nanoid)();
@@ -19091,14 +19114,36 @@ class WindCircleLayer {
         return this.map;
     }
     /**
-     * 画风圈
+     * @desc 画风圈
      * @returns
      */
     addCircleLayer() {
         const layer = _mapBox__WEBPACK_IMPORTED_MODULE_0__["default"].drawFillPolygon(this.sourceId, 0.4);
         this.map.addLayer(layer);
         this.layer = layer;
+        this.map.on('mouseenter', this.layer.id, this.showWindRadius);
+        this.map.on('mousemove', this.layer.id, this.moveWindRadius);
+        this.map.on('mouseleave', this.layer.id, this.removePop);
         return this;
+    }
+    addPop(pointLike) {
+        this.removePop();
+        const html = `<div class='box'>
+      <span>${this.name}: (</span>
+      <span>东北${this.arr[3]}km， </span>
+      <span>东南${this.arr[2]}km， </span>
+      <span>西南${this.arr[1]}km， </span>
+      <span>西北${this.arr[0]}km )</span>
+    </div>
+    `;
+        const popupOffsets = {
+            left: [5, 0]
+        };
+        this.popup_name = new this.mapbox.Popup({ offset: popupOffsets, anchor: 'left', closeOnClick: false, closeButton: false, className: 'tyRouter-name' })
+            .setLngLat([pointLike.lng, pointLike.lat])
+            .setHTML(html)
+            .addTo(this.map);
+        return html;
     }
     // 生成geoJson
     getJeoJson(arr) {
@@ -19794,20 +19839,20 @@ __webpack_require__.r(__webpack_exports__);
  * @param pointer
  * @returns
  */
-function createWindCircle(map, pointer) {
+function createWindCircle(mapbox, map, pointer) {
     let radius7;
     let radius10;
     let radius12;
-    // console.log(pointer)
+    console.log(pointer);
     const quad7 = Object.values(pointer.radius7_quad).reverse();
     const quad10 = Object.values(pointer.radius10_quad).reverse();
     const quad12 = Object.values(pointer.radius12_quad).reverse();
     // if (pointer.radius7)
-    radius7 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(map, [pointer.lng, pointer.lat], quad7, '#62E3CE').addCircleLayer();
+    radius7 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(mapbox, map, [pointer.lng, pointer.lat], quad7, '#62E3CE', '七级风圈').addCircleLayer();
     // if (pointer.radius7)
-    radius10 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(map, [pointer.lng, pointer.lat], quad10, '#62E371').addCircleLayer();
+    radius10 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(mapbox, map, [pointer.lng, pointer.lat], quad10, '#62E371', '十级风圈').addCircleLayer();
     // if (pointer.radius7)
-    radius12 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(map, [pointer.lng, pointer.lat], quad12, '#A5E362').addCircleLayer();
+    radius12 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(mapbox, map, [pointer.lng, pointer.lat], quad12, '#A5E362', '十二级风圈').addCircleLayer();
     return {
         refresh: (pointer) => {
             const quad7 = Object.values(pointer.radius7_quad).reverse();
@@ -41720,7 +41765,7 @@ class Typhoon {
             this.drawForecast(data[data.length - 1]);
     }
     drawWindCircle(pointer) {
-        this.windCircle = (0,_base_windCircle__WEBPACK_IMPORTED_MODULE_2__.createWindCircle)(this.map, pointer);
+        this.windCircle = (0,_base_windCircle__WEBPACK_IMPORTED_MODULE_2__.createWindCircle)(this.mapbox, this.map, pointer);
     }
     /**
      * @desc 添加预报路径

@@ -1,3 +1,4 @@
+import mapboxgl from 'mapbox-gl'
 import { WindCircleLayer } from './Layer'
 type Quad = {
   ne: number
@@ -32,34 +33,41 @@ export interface WindCircle {
  * @param pointer
  * @returns
  */
-export function createWindCircle(map: any, pointer: WindCircle) {
+    
+export function createWindCircle(mapbox: typeof mapboxgl, map: any, pointer: WindCircle) {
   let radius7: WindCircleLayer
   let radius10: WindCircleLayer
   let radius12: WindCircleLayer
-  // console.log(pointer)
+  console.log(pointer)
   const quad7 = Object.values(pointer.radius7_quad).reverse()
   const quad10 = Object.values(pointer.radius10_quad).reverse()
   const quad12 = Object.values(pointer.radius12_quad).reverse()
   // if (pointer.radius7)
     radius7 = new WindCircleLayer(
+      mapbox,
       map,
       [pointer.lng, pointer.lat],
       quad7,
-      '#62E3CE'
+      '#62E3CE',
+      '七级风圈'
     ).addCircleLayer()
   // if (pointer.radius7)
     radius10 = new WindCircleLayer(
+      mapbox,
       map,
       [pointer.lng, pointer.lat],
       quad10,
-      '#62E371'
+      '#62E371',
+      '十级风圈'
     ).addCircleLayer()
   // if (pointer.radius7)
     radius12 = new WindCircleLayer(
+      mapbox,
       map,
       [pointer.lng, pointer.lat],
       quad12,
-      '#A5E362'
+      '#A5E362',
+      '十二级风圈'
     ).addCircleLayer()
 
   return {

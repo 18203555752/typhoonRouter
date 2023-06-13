@@ -73,11 +73,11 @@ declare class windRouteCircleLayer extends BaseLayer {
     protected data: any;
     constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, arr: any[], data: any);
     /**
-     * 清楚图层
+     * @desc 清除图层
      */
     clearLayer(): void;
     /**
-     * 添加图层
+     * @desc 添加图层
      * @param key property中字段名称
      * @param offset number[] 偏移量
      * @param anchor 显示位置
@@ -85,12 +85,12 @@ declare class windRouteCircleLayer extends BaseLayer {
      */
     addCircleLayer(color?: string, offset?: number[], size?: number): this;
     /**
-     * 鼠标移入pointer事件
+     * @desc 鼠标移入pointer事件
      * @param e 当前pointer的对象
      */
     mouseEnterFunc(e: HasFeater): void;
     /**
-     * 鼠标移出pointer事件
+     * @desc 鼠标移出pointer事件
      * @param e 当前pointer的对象
      */
     mouseOutFunc(): void;
@@ -106,17 +106,29 @@ declare class WindCircleLayer {
     layer: mapboxgl.Layer | null;
     protected color: string;
     sourceId: any;
-    constructor(map: mapboxgl.Map, center: number[], arr: number[], color?: string);
+    protected popup_name: mapboxgl.Popup | null;
+    mapbox: typeof mapboxgl;
+    protected name: string;
+    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, center: number[], arr: number[], color?: string, name?: string);
     private getFeatures;
     /**
-     * 增加数据源
+     * @desc 增加数据源
      */
     protected addSource(source: any): mapboxgl.Map;
     /**
-     * 画风圈
+     * @desc 画风圈
      * @returns
      */
     addCircleLayer(): this;
+    /**
+     * @desc 风圈添加鼠标移动事件
+     * @returns
+     */
+    showWindRadius: (e: HasFeater) => void;
+    moveWindRadius: (e: HasFeater) => void;
+    addPop(pointLike: any): string;
+    removePop: () => void;
+    movePop: (pointLike: any) => void;
     protected getJeoJson(arr: Array<any>): {
         type: string;
         data: {
