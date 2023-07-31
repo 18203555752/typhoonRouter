@@ -325,7 +325,9 @@ class WindCircleLayer {
   protected step = 180
   protected geoJson: any = null
   layer: mapboxgl.Layer | null = null
+  borderLayer: mapboxgl.Layer | null = null
   protected color: string
+  protected borderColor: string
   sourceId: any
   protected popup_name: mapboxgl.Popup | null = null
   mapbox: typeof mapboxgl
@@ -336,10 +338,12 @@ class WindCircleLayer {
     center: number[],
     arr: number[],
     color: string = '#78C5BB',
+    borderColor: string = '#fffc00',
     name: string = '风圈'
   ) {
     this.mapbox = mapbox
     this.color = color
+    this.borderColor = borderColor
     this.map = map
     this.arr = arr
     this.center = center
@@ -381,9 +385,13 @@ class WindCircleLayer {
    * @returns
    */
   addCircleLayer() {
-    const layer = mapUtil.drawFillPolygon(this.sourceId, 0.4)
-    this.map.addLayer(layer)
+    const layer = mapUtil.drawFillPolygon(this.sourceId, 0.4)    
     this.layer = layer
+    const borderLayer = mapUtil.drawMultiPolygon( this.borderColor, this.sourceId, 1, this.sourceId+ 'b')
+    this.borderLayer = borderLayer
+    console.log(this.borderColor)
+    this.map.addLayer(layer)
+    this.map.addLayer(borderLayer)
     this.map.on('mouseenter', this.layer.id, this.showWindRadius)
     this.map.on('mousemove', this.layer.id, this.moveWindRadius)
     this.map.on('mouseleave', this.layer.id, this.removePop)
@@ -450,6 +458,7 @@ class WindCircleLayer {
   }
   clearLayer() {
     this.map.getLayer(this.layer!.id) && this.map.removeLayer(this.layer!.id)
+    this.map.getLayer(this.borderLayer!.id) && this.map.removeLayer(this.borderLayer!.id)
     this.map.getSource(this.sourceId) && this.map.removeSource(this.sourceId)
   }
 }
@@ -655,7 +664,7 @@ class forecastRouterLayer {
   addPop(message: any) {
     //@ts-ignore
     const html = `<div class='windRouterPop__box'>
-      <div class='windRouterPop_row'> <div class='row-time'>预报机构： </div> <div class='row-content'>${message.issuer}</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>预报机构： </div> <div class='row-content'>${message.issuerName}</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>时间： </div> <div class='row-content'>${message.time}</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>当前位置： </div> <div class='row-content'>${message.lng}E/${message.lat}N</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>中心气压： </div> <div class='row-content'>${message.pressure == 9999 ? '--' : message.pressure} 百帕</div> </div>

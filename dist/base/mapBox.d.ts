@@ -81,7 +81,7 @@ declare class MapBox {
      * @param source 数据源
      * @returns
      */
-    drawMultiPolygon(lineColor?: string, source?: string, lineWidth?: number): mapbox.LineLayer;
+    drawMultiPolygon(lineColor?: string, source?: string, lineWidth?: number, layerId?: string): mapbox.LineLayer;
     /**
      *
      * @param lineColor 线颜色

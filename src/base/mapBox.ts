@@ -389,10 +389,11 @@ class MapBox {
   drawMultiPolygon(
     lineColor = 'rgba(0,0,0,0.8)',
     source = 'bounds',
-    lineWidth = 2
+    lineWidth = 2,
+    layerId?: string
   ) {
     let layer: mapbox.LineLayer = {
-      id: source,
+      id: layerId || source,
       type: 'line' /* fill类型layer */,
       source: source,
       // layout: {},

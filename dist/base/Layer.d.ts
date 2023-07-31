@@ -104,12 +104,14 @@ declare class WindCircleLayer {
     protected step: number;
     protected geoJson: any;
     layer: mapboxgl.Layer | null;
+    borderLayer: mapboxgl.Layer | null;
     protected color: string;
+    protected borderColor: string;
     sourceId: any;
     protected popup_name: mapboxgl.Popup | null;
     mapbox: typeof mapboxgl;
     protected name: string;
-    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, center: number[], arr: number[], color?: string, name?: string);
+    constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, center: number[], arr: number[], color?: string, borderColor?: string, name?: string);
     private getFeatures;
     /**
      * @desc 增加数据源

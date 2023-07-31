@@ -19054,10 +19054,11 @@ class windRouteCircleLayer extends BaseLayer {
 }
 // 风圈
 class WindCircleLayer {
-    constructor(mapbox, map, center, arr, color = '#78C5BB', name = '风圈') {
+    constructor(mapbox, map, center, arr, color = '#78C5BB', borderColor = '#fffc00', name = '风圈') {
         this.step = 180;
         this.geoJson = null;
         this.layer = null;
+        this.borderLayer = null;
         this.popup_name = null;
         /**
          * @desc 风圈添加鼠标移动事件
@@ -19081,6 +19082,7 @@ class WindCircleLayer {
         };
         this.mapbox = mapbox;
         this.color = color;
+        this.borderColor = borderColor;
         this.map = map;
         this.arr = arr;
         this.center = center;
@@ -19119,8 +19121,12 @@ class WindCircleLayer {
      */
     addCircleLayer() {
         const layer = _mapBox__WEBPACK_IMPORTED_MODULE_0__["default"].drawFillPolygon(this.sourceId, 0.4);
-        this.map.addLayer(layer);
         this.layer = layer;
+        const borderLayer = _mapBox__WEBPACK_IMPORTED_MODULE_0__["default"].drawMultiPolygon(this.borderColor, this.sourceId, 1, this.sourceId + 'b');
+        this.borderLayer = borderLayer;
+        console.log(this.borderColor);
+        this.map.addLayer(layer);
+        this.map.addLayer(borderLayer);
         this.map.on('mouseenter', this.layer.id, this.showWindRadius);
         this.map.on('mousemove', this.layer.id, this.moveWindRadius);
         this.map.on('mouseleave', this.layer.id, this.removePop);
@@ -19168,6 +19174,7 @@ class WindCircleLayer {
     }
     clearLayer() {
         this.map.getLayer(this.layer.id) && this.map.removeLayer(this.layer.id);
+        this.map.getLayer(this.borderLayer.id) && this.map.removeLayer(this.borderLayer.id);
         this.map.getSource(this.sourceId) && this.map.removeSource(this.sourceId);
     }
 }
@@ -19369,7 +19376,7 @@ class forecastRouterLayer {
     addPop(message) {
         //@ts-ignore
         const html = `<div class='windRouterPop__box'>
-      <div class='windRouterPop_row'> <div class='row-time'>预报机构： </div> <div class='row-content'>${message.issuer}</div> </div>
+      <div class='windRouterPop_row'> <div class='row-time'>预报机构： </div> <div class='row-content'>${message.issuerName}</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>时间： </div> <div class='row-content'>${message.time}</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>当前位置： </div> <div class='row-content'>${message.lng}E/${message.lat}N</div> </div>
       <div class='windRouterPop_row'> <div class='row-time'>中心气压： </div> <div class='row-content'>${message.pressure == 9999 ? '--' : message.pressure} 百帕</div> </div>
@@ -19704,9 +19711,9 @@ class MapBox {
      * @param source 数据源
      * @returns
      */
-    drawMultiPolygon(lineColor = 'rgba(0,0,0,0.8)', source = 'bounds', lineWidth = 2) {
+    drawMultiPolygon(lineColor = 'rgba(0,0,0,0.8)', source = 'bounds', lineWidth = 2, layerId) {
         let layer = {
-            id: source,
+            id: layerId || source,
             type: 'line' /* fill类型layer */,
             source: source,
             // layout: {},
@@ -19848,11 +19855,11 @@ function createWindCircle(mapbox, map, pointer) {
     const quad10 = Object.values(pointer.radius10_quad).reverse();
     const quad12 = Object.values(pointer.radius12_quad).reverse();
     // if (pointer.radius7)
-    radius7 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(mapbox, map, [pointer.lng, pointer.lat], quad7, '#62E3CE', '七级风圈').addCircleLayer();
+    radius7 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(mapbox, map, [pointer.lng, pointer.lat], quad7, '#62E3CE', 'rgba(69, 96, 204, 0.5)', '七级风圈').addCircleLayer();
     // if (pointer.radius7)
-    radius10 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(mapbox, map, [pointer.lng, pointer.lat], quad10, '#62E371', '十级风圈').addCircleLayer();
+    radius10 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(mapbox, map, [pointer.lng, pointer.lat], quad10, '#62E371', 'rgba(255, 252, 0, 0.6)', '十级风圈').addCircleLayer();
     // if (pointer.radius7)
-    radius12 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(mapbox, map, [pointer.lng, pointer.lat], quad12, '#A5E362', '十二级风圈').addCircleLayer();
+    radius12 = new _Layer__WEBPACK_IMPORTED_MODULE_0__.WindCircleLayer(mapbox, map, [pointer.lng, pointer.lat], quad12, '#A5E362', 'rgba(250, 48, 48, 0.6)', '十二级风圈').addCircleLayer();
     return {
         refresh: (pointer) => {
             const quad7 = Object.values(pointer.radius7_quad).reverse();

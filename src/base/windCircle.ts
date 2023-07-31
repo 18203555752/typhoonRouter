@@ -48,7 +48,8 @@ export function createWindCircle(mapbox: typeof mapboxgl, map: any, pointer: Win
       map,
       [pointer.lng, pointer.lat],
       quad7,
-      '#62E3CE',
+      '#62E3CE', 
+      'rgba(69, 96, 204, 0.5)',
       '七级风圈'
     ).addCircleLayer()
   // if (pointer.radius7)
@@ -58,6 +59,7 @@ export function createWindCircle(mapbox: typeof mapboxgl, map: any, pointer: Win
       [pointer.lng, pointer.lat],
       quad10,
       '#62E371',
+      'rgba(255, 252, 0, 0.6)',
       '十级风圈'
     ).addCircleLayer()
   // if (pointer.radius7)
@@ -67,6 +69,7 @@ export function createWindCircle(mapbox: typeof mapboxgl, map: any, pointer: Win
       [pointer.lng, pointer.lat],
       quad12,
       '#A5E362',
+      'rgba(250, 48, 48, 0.6)',
       '十二级风圈'
     ).addCircleLayer()
 
