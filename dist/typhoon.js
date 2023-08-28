@@ -41690,15 +41690,12 @@ class Typhoon {
     backCenter() {
         const pointers = this.data.points;
         const frist = [Number(pointers[0].lng), Number(pointers[0].lat)];
-        const polygon = _turf_turf__WEBPACK_IMPORTED_MODULE_4__.polygon([[...pointers.map((item) => [Number(item.lng), Number(item.lat)]), frist]]);
-        // debugger
-        this.center = _turf_turf__WEBPACK_IMPORTED_MODULE_4__.centroid(polygon).geometry.coordinates;
-        // const lngs = polygon.geometry.coordinates[0].map((item)=> item[0])
-        // const lats = polygon.geometry.coordinates[0].map((item)=> item[1])
-        // const maxLon = Math.max(...lngs)
-        // const minLon = Math.min(...lngs)
-        // const maxLat = Math.max(...lats)
-        // const minLat = Math.min(...lats)
+        this.center = frist;
+        if (pointers.length && pointers.length >= 4) {
+            const polygon = _turf_turf__WEBPACK_IMPORTED_MODULE_4__.polygon([[...pointers.map((item) => [Number(item.lng), Number(item.lat)]), frist]]);
+            // debugger
+            this.center = _turf_turf__WEBPACK_IMPORTED_MODULE_4__.centroid(polygon).geometry.coordinates;
+        }
         this.map.flyTo({
             center: this.center,
             zoom: 4.3,

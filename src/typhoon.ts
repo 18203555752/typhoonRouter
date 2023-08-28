@@ -74,16 +74,13 @@ class Typhoon {
   }
   backCenter() {
     const pointers = this.data.points
-    const frist = [ Number(pointers[0].lng), Number(pointers[0].lat) ]
-    const polygon = turf.polygon([[...pointers.map((item: any)=> [Number(item.lng), Number(item.lat)]), frist]])
-    // debugger
-    this.center = turf.centroid(polygon).geometry.coordinates as [number, number]
-    // const lngs = polygon.geometry.coordinates[0].map((item)=> item[0])
-    // const lats = polygon.geometry.coordinates[0].map((item)=> item[1])
-    // const maxLon = Math.max(...lngs)
-    // const minLon = Math.min(...lngs)
-    // const maxLat = Math.max(...lats)
-    // const minLat = Math.min(...lats)
+    const frist = [ Number(pointers[0].lng), Number(pointers[0].lat) ] as [number, number]
+    this.center = frist
+    if(pointers.length && pointers.length>=4) {
+      const polygon = turf.polygon([[...pointers.map((item: any)=> [Number(item.lng), Number(item.lat)]), frist]])
+      // debugger
+      this.center = turf.centroid(polygon).geometry.coordinates as [number, number]
+    }
     
     this.map.flyTo({
       center: this.center ,
