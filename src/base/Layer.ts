@@ -4,7 +4,8 @@ import type mapboxgl from 'mapbox-gl'
 import mapUtil from './mapBox'
 import { nanoid } from 'nanoid'
 import turfCircle from '@turf/circle'
-import type { WindCircle } from './windCircle'
+import { Pointer } from '../types/type'
+
 // import { Feature } from 'geojson';
 export interface HasFeater extends mapboxgl.MapMouseEvent {
   features?: MapboxGeoJSONFeature[]
@@ -240,7 +241,7 @@ class windRouteCircleLayer extends BaseLayer {
     // console.log(e.features)
     if (e.features) {
       if (this.popup) this.popup.remove()
-      this.addPop(e.features[0].properties as WindCircle)
+      this.addPop(e.features[0].properties as Pointer)
     }
   }
   /**
@@ -268,7 +269,7 @@ class windRouteCircleLayer extends BaseLayer {
       .addTo(this.map)
     return html
   }
-  addPop(message: WindCircle) {
+  addPop(message: Pointer) {
     //@ts-ignore
     const html = `<div class='windRouterPop__box'>
       <div class='windRouterPop_title'> <div class='row-content'>${
@@ -475,13 +476,12 @@ class forecastRouterLayer {
   protected popup!: mapboxgl.Popup
   protected mapbox!: typeof mapboxgl
   // protected keysTxt:string[] = []
-  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: Array<any>) {
+  constructor(mapbox: typeof mapboxgl, map: mapboxgl.Map, data: Array<any>, strokeColor: string) {
     this.map = map
     this.mapbox = mapbox
     this.circleJson = this.getJeoJson(data)
     this.lineJson = this.getLineJson(data)
-    let strokeColor: string = '#7EAEC6'
-    strokeColor = data[0].strokeColor ? data[0].strokeColor : strokeColor
+    strokeColor = strokeColor ? strokeColor : '#7EAEC6'
     this.addLineLayer(strokeColor)
     this.addCircleLayer()
   }
@@ -541,7 +541,7 @@ class forecastRouterLayer {
   //     },
   //     properties: el,
   //   }
-  protected getJeoJson(pointers: Array<WindCircle>) {
+  protected getJeoJson(pointers: Array<Pointer>) {
     let pointerArr: any = []
     pointers.forEach((item, index) => {
       if (!index) return
@@ -567,7 +567,7 @@ class forecastRouterLayer {
     }
     return geoJson
   }
-  protected getLineJson(pointers: Array<WindCircle>) {
+  protected getLineJson(pointers: Array<Pointer>) {
     const coordinates: any = []
     pointers.forEach((item) => {
       coordinates.push([item.lng, item.lat])

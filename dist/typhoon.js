@@ -41756,6 +41756,8 @@ class Typhoon {
      * @return {void}
      */
     anyDraw(index, isAnimate) {
+        if (!this.windCircle)
+            return; //无windCircle 说明台风首次未完成
         if (index < 0)
             index = this.data.points.length - 1;
         this.removeForecast();
